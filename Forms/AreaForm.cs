@@ -27,7 +27,7 @@ namespace SpectrometerMeasurementsApplication
 
         private void button6_Click(object sender, EventArgs e)
         {
-            ProjectDataForm form4 = new ProjectDataForm("пусто", "admin");
+            ProjectDataForm form4 = new ProjectDataForm(null, "admin", null, null,null);
             this.Hide();
             form4.Show();
         }
