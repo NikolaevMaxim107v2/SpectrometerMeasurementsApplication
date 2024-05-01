@@ -36,12 +36,15 @@
             button4 = new Button();
             label1 = new Label();
             label2 = new Label();
-            launchText = new Label();
-            listBox2 = new ListBox();
-            listBox3 = new ListBox();
-            listBox1 = new ListBox();
             comboBox1 = new ComboBox();
             label3 = new Label();
+            comboBox2 = new ComboBox();
+            comboBox3 = new ComboBox();
+            textBox1 = new TextBox();
+            label4 = new Label();
+            button5 = new Button();
+            button8 = new Button();
+            button9 = new Button();
             SuspendLayout();
             // 
             // button6
@@ -56,7 +59,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(116, 203);
+            button1.Location = new Point(116, 209);
             button1.Name = "button1";
             button1.Size = new Size(102, 26);
             button1.TabIndex = 45;
@@ -65,7 +68,7 @@
             // 
             // button7
             // 
-            button7.Location = new Point(12, 203);
+            button7.Location = new Point(12, 209);
             button7.Name = "button7";
             button7.Size = new Size(102, 26);
             button7.TabIndex = 43;
@@ -74,7 +77,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(12, 203);
+            button2.Location = new Point(12, 209);
             button2.Name = "button2";
             button2.Size = new Size(102, 26);
             button2.TabIndex = 44;
@@ -83,7 +86,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(116, 384);
+            button3.Location = new Point(116, 297);
             button3.Name = "button3";
             button3.Size = new Size(102, 26);
             button3.TabIndex = 41;
@@ -92,7 +95,7 @@
             // 
             // button4
             // 
-            button4.Location = new Point(12, 384);
+            button4.Location = new Point(12, 297);
             button4.Name = "button4";
             button4.Size = new Size(102, 26);
             button4.TabIndex = 40;
@@ -102,7 +105,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(84, 236);
+            label1.Location = new Point(91, 250);
             label1.Name = "label1";
             label1.Size = new Size(49, 15);
             label1.TabIndex = 39;
@@ -113,7 +116,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(65, 55);
+            label2.Location = new Point(69, 162);
             label2.Name = "label2";
             label2.Size = new Size(93, 15);
             label2.TabIndex = 37;
@@ -121,48 +124,10 @@
             label2.TextAlign = ContentAlignment.TopCenter;
             label2.UseMnemonic = false;
             // 
-            // launchText
-            // 
-            launchText.AutoSize = true;
-            launchText.Location = new Point(65, 55);
-            launchText.Name = "launchText";
-            launchText.Size = new Size(94, 15);
-            launchText.TabIndex = 38;
-            launchText.Text = "Точки площади";
-            launchText.TextAlign = ContentAlignment.TopCenter;
-            launchText.UseMnemonic = false;
-            // 
-            // listBox2
-            // 
-            listBox2.FormattingEnabled = true;
-            listBox2.ItemHeight = 15;
-            listBox2.Location = new Point(12, 254);
-            listBox2.Name = "listBox2";
-            listBox2.Size = new Size(206, 124);
-            listBox2.TabIndex = 36;
-            // 
-            // listBox3
-            // 
-            listBox3.FormattingEnabled = true;
-            listBox3.ItemHeight = 15;
-            listBox3.Location = new Point(12, 73);
-            listBox3.Name = "listBox3";
-            listBox3.Size = new Size(206, 124);
-            listBox3.TabIndex = 34;
-            // 
-            // listBox1
-            // 
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 15;
-            listBox1.Location = new Point(12, 73);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(206, 124);
-            listBox1.TabIndex = 35;
-            // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(12, 24);
+            comboBox1.Location = new Point(12, 93);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(206, 23);
             comboBox1.TabIndex = 48;
@@ -170,7 +135,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(74, 6);
+            label3.Location = new Point(81, 75);
             label3.Name = "label3";
             label3.Size = new Size(70, 15);
             label3.TabIndex = 49;
@@ -178,11 +143,80 @@
             label3.TextAlign = ContentAlignment.TopCenter;
             label3.UseMnemonic = false;
             // 
+            // comboBox2
+            // 
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(12, 180);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(206, 23);
+            comboBox2.TabIndex = 50;
+            // 
+            // comboBox3
+            // 
+            comboBox3.FormattingEnabled = true;
+            comboBox3.Location = new Point(12, 268);
+            comboBox3.Name = "comboBox3";
+            comboBox3.Size = new Size(206, 23);
+            comboBox3.TabIndex = 51;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(12, 30);
+            textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
+            textBox1.Size = new Size(206, 23);
+            textBox1.TabIndex = 52;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(81, 12);
+            label4.Name = "label4";
+            label4.Size = new Size(59, 15);
+            label4.TabIndex = 53;
+            label4.Text = "Профиль";
+            label4.TextAlign = ContentAlignment.TopCenter;
+            label4.UseMnemonic = false;
+            // 
+            // button5
+            // 
+            button5.Location = new Point(116, 122);
+            button5.Name = "button5";
+            button5.Size = new Size(102, 26);
+            button5.TabIndex = 56;
+            button5.Text = "Удалить";
+            button5.UseVisualStyleBackColor = true;
+            // 
+            // button8
+            // 
+            button8.Location = new Point(12, 122);
+            button8.Name = "button8";
+            button8.Size = new Size(102, 26);
+            button8.TabIndex = 54;
+            button8.Text = "Добавить";
+            button8.UseVisualStyleBackColor = true;
+            // 
+            // button9
+            // 
+            button9.Location = new Point(12, 122);
+            button9.Name = "button9";
+            button9.Size = new Size(102, 26);
+            button9.TabIndex = 55;
+            button9.Text = "Добавить";
+            button9.UseVisualStyleBackColor = true;
+            // 
             // ProfileForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(button5);
+            Controls.Add(button8);
+            Controls.Add(button9);
+            Controls.Add(label4);
+            Controls.Add(textBox1);
+            Controls.Add(comboBox3);
+            Controls.Add(comboBox2);
             Controls.Add(label3);
             Controls.Add(comboBox1);
             Controls.Add(button6);
@@ -193,13 +227,10 @@
             Controls.Add(button4);
             Controls.Add(label1);
             Controls.Add(label2);
-            Controls.Add(launchText);
-            Controls.Add(listBox2);
-            Controls.Add(listBox3);
-            Controls.Add(listBox1);
             Name = "ProfileForm";
             Text = "Данные профиля";
             FormClosed += ProfileForm_FormClosed;
+            Load += ProfileForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -214,11 +245,14 @@
         private Button button4;
         private Label label1;
         private Label label2;
-        private Label launchText;
-        private ListBox listBox2;
-        private ListBox listBox3;
-        private ListBox listBox1;
         private ComboBox comboBox1;
         private Label label3;
+        private ComboBox comboBox2;
+        private ComboBox comboBox3;
+        private TextBox textBox1;
+        private Label label4;
+        private Button button5;
+        private Button button8;
+        private Button button9;
     }
 }

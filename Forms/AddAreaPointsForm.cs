@@ -64,6 +64,7 @@ namespace SpectrometerMeasurementsApplication.Forms
             foreach (MeasuringArea area in areas)
                 if (comboBox1.SelectedItem.ToString().Split(" | ")[0] == area.AreaID.ToString())
                     rel_area_id = area.AreaID;
+            last_point_ind++;
             areaPointsCoords.Add(new MeasuringAreaPointsCoords(last_point_ind, Convert.ToInt32(textBoxX.Text),
                 Convert.ToInt32(textBoxY.Text), rel_area_id));
             AreaForm form5 = new AreaForm(currentProject, curUser, projects, customers, areas);

@@ -42,6 +42,7 @@
             comboBox1 = new ComboBox();
             comboBox2 = new ComboBox();
             comboBox3 = new ComboBox();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -59,26 +60,27 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(84, 256);
+            label1.Location = new Point(17, 226);
             label1.Name = "label1";
-            label1.Size = new Size(60, 15);
+            label1.Size = new Size(197, 30);
             label1.TabIndex = 23;
-            label1.Text = "Профили";
+            label1.Text = "Профили\n(Выберите или создайте профиль)";
             label1.TextAlign = ContentAlignment.TopCenter;
             label1.UseMnemonic = false;
             // 
             // button3
             // 
-            button3.Location = new Point(116, 303);
+            button3.Location = new Point(116, 288);
             button3.Name = "button3";
             button3.Size = new Size(102, 26);
             button3.TabIndex = 27;
             button3.Text = "Удалить";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // button4
             // 
-            button4.Location = new Point(12, 303);
+            button4.Location = new Point(12, 288);
             button4.Name = "button4";
             button4.Size = new Size(102, 26);
             button4.TabIndex = 26;
@@ -102,6 +104,7 @@
             button1.TabIndex = 30;
             button1.Text = "Удалить";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
@@ -135,11 +138,11 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(65, 141);
+            label2.Location = new Point(4, 126);
             label2.Name = "label2";
-            label2.Size = new Size(94, 15);
+            label2.Size = new Size(222, 30);
             label2.TabIndex = 22;
-            label2.Text = "Точки площади";
+            label2.Text = "Точки площади\n(Выберите площадь в верхнем списке)";
             label2.TextAlign = ContentAlignment.TopCenter;
             label2.UseMnemonic = false;
             // 
@@ -173,16 +176,28 @@
             // comboBox3
             // 
             comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(12, 274);
+            comboBox3.Location = new Point(12, 259);
             comboBox3.Name = "comboBox3";
             comboBox3.Size = new Size(206, 23);
             comboBox3.TabIndex = 35;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(16, 389);
+            label3.Name = "label3";
+            label3.Size = new Size(209, 45);
+            label3.TabIndex = 36;
+            label3.Text = "(Для добавления профиля выберите\nплощадь в списке выше\nи нажмите добавить)";
+            label3.TextAlign = ContentAlignment.TopCenter;
+            label3.UseMnemonic = false;
             // 
             // AreaForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label3);
             Controls.Add(comboBox3);
             Controls.Add(comboBox2);
             Controls.Add(comboBox1);
@@ -220,5 +235,6 @@
         private ComboBox comboBox1;
         private ComboBox comboBox2;
         private ComboBox comboBox3;
+        private Label label3;
     }
 }
