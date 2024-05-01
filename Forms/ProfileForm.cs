@@ -24,9 +24,9 @@ namespace SpectrometerMeasurementsApplication
 
         private void button6_Click(object sender, EventArgs e)
         {
-            AreaForm form5 = new AreaForm();
-            this.Hide();
-            form5.Show();
+            //AreaForm form5 = new AreaForm();
+            //this.Hide();
+            //form5.Show();
         }
     }
 }

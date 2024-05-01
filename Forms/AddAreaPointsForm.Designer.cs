@@ -1,6 +1,6 @@
 ﻿namespace SpectrometerMeasurementsApplication.Forms
 {
-    partial class AddCustomerForm
+    partial class AddAreaPointsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,46 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
+            textBoxY = new TextBox();
             label3 = new Label();
-            textBoxAddress = new TextBox();
             label2 = new Label();
             label1 = new Label();
-            textBoxName = new TextBox();
+            textBoxX = new TextBox();
             launchText = new Label();
             button1 = new Button();
-            textBox1 = new TextBox();
+            comboBox1 = new ComboBox();
             SuspendLayout();
+            // 
+            // textBoxY
+            // 
+            textBoxY.Location = new Point(135, 73);
+            textBoxY.Name = "textBoxY";
+            textBoxY.PlaceholderText = "Введите координату Y...";
+            textBoxY.RightToLeft = RightToLeft.No;
+            textBoxY.Size = new Size(253, 23);
+            textBoxY.TabIndex = 37;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(21, 97);
+            label3.Location = new Point(29, 101);
             label3.Name = "label3";
-            label3.Size = new Size(138, 19);
-            label3.TabIndex = 28;
-            label3.Text = "Электронный адрес:";
+            label3.Size = new Size(71, 19);
+            label3.TabIndex = 36;
+            label3.Text = "Площадь:";
             label3.TextAlign = ContentAlignment.TopCenter;
             label3.UseMnemonic = false;
-            // 
-            // textBoxAddress
-            // 
-            textBoxAddress.Location = new Point(170, 97);
-            textBoxAddress.Name = "textBoxAddress";
-            textBoxAddress.PlaceholderText = "Введите email...";
-            textBoxAddress.RightToLeft = RightToLeft.No;
-            textBoxAddress.Size = new Size(253, 23);
-            textBoxAddress.TabIndex = 27;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(21, 68);
+            label2.Location = new Point(29, 72);
             label2.Name = "label2";
-            label2.Size = new Size(119, 19);
-            label2.TabIndex = 26;
-            label2.Text = "Номер телефона:";
+            label2.Size = new Size(100, 19);
+            label2.TabIndex = 34;
+            label2.Text = "Координата Y:";
             label2.TextAlign = ContentAlignment.TopCenter;
             label2.UseMnemonic = false;
             // 
@@ -75,82 +75,82 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(21, 40);
+            label1.Location = new Point(29, 44);
             label1.Name = "label1";
-            label1.Size = new Size(143, 19);
-            label1.TabIndex = 25;
-            label1.Text = "ФИО/Наименование:";
+            label1.Size = new Size(100, 19);
+            label1.TabIndex = 33;
+            label1.Text = "Координата X:";
             label1.TextAlign = ContentAlignment.TopCenter;
             label1.UseMnemonic = false;
             // 
-            // textBoxName
+            // textBoxX
             // 
-            textBoxName.Location = new Point(170, 39);
-            textBoxName.Name = "textBoxName";
-            textBoxName.PlaceholderText = "Введите ФИО/Название...";
-            textBoxName.RightToLeft = RightToLeft.No;
-            textBoxName.Size = new Size(253, 23);
-            textBoxName.TabIndex = 24;
+            textBoxX.Location = new Point(135, 44);
+            textBoxX.Name = "textBoxX";
+            textBoxX.PlaceholderText = "Введите координату X...";
+            textBoxX.RightToLeft = RightToLeft.No;
+            textBoxX.Size = new Size(253, 23);
+            textBoxX.TabIndex = 32;
             // 
             // launchText
             // 
             launchText.AutoSize = true;
             launchText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            launchText.Location = new Point(150, 9);
+            launchText.Location = new Point(133, 13);
             launchText.Name = "launchText";
-            launchText.Size = new Size(153, 19);
-            launchText.TabIndex = 23;
-            launchText.Text = "Добавление заказчика";
+            launchText.Size = new Size(189, 19);
+            launchText.TabIndex = 31;
+            launchText.Text = "Добавление точки площади";
             launchText.TextAlign = ContentAlignment.TopCenter;
             launchText.UseMnemonic = false;
             // 
             // button1
             // 
-            button1.Location = new Point(90, 141);
+            button1.Location = new Point(98, 145);
             button1.Name = "button1";
             button1.Size = new Size(253, 22);
-            button1.TabIndex = 22;
+            button1.TabIndex = 30;
             button1.Text = "Добавить";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // textBox1
+            // comboBox1
             // 
-            textBox1.Location = new Point(170, 68);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Введите номер телефона...";
-            textBox1.RightToLeft = RightToLeft.No;
-            textBox1.Size = new Size(253, 23);
-            textBox1.TabIndex = 29;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(135, 102);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(253, 23);
+            comboBox1.TabIndex = 38;
             // 
-            // AddCustomerForm
+            // AddAreaPointsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(460, 175);
-            Controls.Add(textBox1);
+            ClientSize = new Size(469, 202);
+            Controls.Add(comboBox1);
+            Controls.Add(textBoxY);
             Controls.Add(label3);
-            Controls.Add(textBoxAddress);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(textBoxName);
+            Controls.Add(textBoxX);
             Controls.Add(launchText);
             Controls.Add(button1);
-            Name = "AddCustomerForm";
-            Text = "Добавление заказчика";
-            FormClosed += AddCustomerForm_FormClosed;
+            Name = "AddAreaPointsForm";
+            Text = "Добавление точки площади";
+            FormClosed += AddAreaPointsForm_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
+
+        public TextBox textBoxY;
         private Label label3;
-        public TextBox textBoxAddress;
         private Label label2;
         private Label label1;
-        public TextBox textBoxName;
+        public TextBox textBoxX;
         private Label launchText;
         private Button button1;
-        public TextBox textBox1;
+        private ComboBox comboBox1;
     }
 }

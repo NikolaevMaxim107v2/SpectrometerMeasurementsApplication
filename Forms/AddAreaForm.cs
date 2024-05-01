@@ -18,6 +18,8 @@ namespace SpectrometerMeasurementsApplication.Forms
     {
         private List<MeasuringArea> areas = new List<MeasuringArea>();
         private List<Customer> customers = new List<Customer>();
+        public List<MeasuringAreaPointsCoords> areaPointsCoords = new List<MeasuringAreaPointsCoords>();
+        public List<MeasuringAreaProfile> areaProfiles = new List<MeasuringAreaProfile>();
         string curUser;
         List<Project> projectsList = new List<Project>();
         List<string> projectsNames = new List<string>();
@@ -32,13 +34,15 @@ namespace SpectrometerMeasurementsApplication.Forms
             areas = areaslist;
             last_id = id;
             foreach(Project project in projectsList)
-                projectsNames.Add(project.ProjectName);
+                projectsNames.Add(project.ProjectID + " | " + project.ProjectName);
             comboBox1.DataSource = projectsNames;
         }
 
         private void AddAreaForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             MainForm form3 = new MainForm(curUser, projectsList, customers, areas);
+            form3.areaPointsCoords = areaPointsCoords;
+            form3.areaProfiles = areaProfiles;
             this.Hide();
             form3.Show();
         }
@@ -46,11 +50,15 @@ namespace SpectrometerMeasurementsApplication.Forms
         private void button1_Click(object sender, EventArgs e)
         {
             foreach (Project project in projectsList)
-                if (comboBox1.SelectedItem.ToString() == project.ProjectName)
+                if (comboBox1.SelectedItem.ToString().Split(" | ")[0] == project.ProjectID.ToString())
                     rel_project_id = project.ProjectID;
+            last_id++;
             areas.Add(new MeasuringArea(last_id, textBoxName.Text, rel_project_id));
             MainForm form3 = new MainForm(curUser, projectsList, customers, areas);
             form3.areaList = areas;
+            form3.projectsList = projectsList;
+            form3.areaPointsCoords = areaPointsCoords;
+            form3.areaProfiles = areaProfiles;
             this.Hide();
             form3.Show();
         }

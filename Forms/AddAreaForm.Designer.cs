@@ -111,7 +111,7 @@
             Controls.Add(launchText);
             Controls.Add(button1);
             Name = "AddAreaForm";
-            Text = "AddAreaForm";
+            Text = "Добавить площадь";
             FormClosed += AddAreaForm_FormClosed;
             ResumeLayout(false);
             PerformLayout();
