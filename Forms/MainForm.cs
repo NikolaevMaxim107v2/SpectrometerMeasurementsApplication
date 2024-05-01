@@ -21,6 +21,10 @@ namespace SpectrometerMeasurementsApplication
         private DataTable projectsTable = new DataTable("projectsTable");
         public List<Customer> customersList = new List<Customer>();
         public List<MeasuringArea> areaList = new List<MeasuringArea>();
+        public List<Operator> operators = new List<Operator>();
+        public List<ProfilePointsCoords> profilePoints = new List<ProfilePointsCoords>();
+        public List<Picket> pickets = new List<Picket>();
+        public List<PicketCoords> picketCoordsList = new List<PicketCoords>();
         private List<string> customers = new List<string>();
         private List<string> areas = new List<string>();
         private Project curProject;
@@ -72,6 +76,10 @@ namespace SpectrometerMeasurementsApplication
             ProjectDataForm form4 = new ProjectDataForm(curProject, curUser, projectsList, customersList, areaList);//нужно изменить входные данные
             form4.areaPointsCoords = areaPointsCoords;
             form4.areaProfiles = areaProfiles;
+            form4.operators = operators;
+            form4.profilePoints = profilePoints;
+            form4.pickets = pickets;
+            form4.picketCoordsList = picketCoordsList;
             this.Hide();
             form4.Show();
         }
@@ -120,6 +128,10 @@ namespace SpectrometerMeasurementsApplication
                 AddProjectForm addProjectForm = new AddProjectForm(last_project_ind, curUser, projectsList, customersList, areaList);
                 addProjectForm.areaPointsCoords = areaPointsCoords;
                 addProjectForm.areaProfiles = areaProfiles;
+                addProjectForm.operators = operators;
+                addProjectForm.profilePoints = profilePoints;
+                addProjectForm.pickets = pickets;
+                addProjectForm.picketCoordsList = picketCoordsList;
                 this.Hide();
                 addProjectForm.ShowDialog();
             }
@@ -186,7 +198,11 @@ namespace SpectrometerMeasurementsApplication
         {
             AddCustomerForm addCustomerForm = new AddCustomerForm(last_customer_ind, curUser, projectsList, customersList, areaList);
             addCustomerForm.areaPointsCoords = areaPointsCoords;
-            addCustomerForm.areaProfiles = areaProfiles; 
+            addCustomerForm.areaProfiles = areaProfiles;
+            addCustomerForm.operators = operators;
+            addCustomerForm.profilePoints = profilePoints;
+            addCustomerForm.pickets = pickets;
+            addCustomerForm.picketCoordsList = picketCoordsList;
             this.Hide();
             addCustomerForm.ShowDialog();
         }
@@ -198,6 +214,10 @@ namespace SpectrometerMeasurementsApplication
                 AddAreaForm addAreaForm = new AddAreaForm(last_area_ind, curUser, projectsList, customersList, areaList);
                 addAreaForm.areaPointsCoords = areaPointsCoords;
                 addAreaForm.areaProfiles = areaProfiles;
+                addAreaForm.operators = operators;
+                addAreaForm.profilePoints = profilePoints;
+                addAreaForm.pickets = pickets;
+                addAreaForm.picketCoordsList = picketCoordsList;
                 this.Hide();
                 addAreaForm.ShowDialog();
             }

@@ -9,11 +9,15 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SpectrometerMeasurementsApplication.Forms
 {
-    public partial class AddCustomerForm : Form
+    public partial class AddOperatorForm : Form
     {
+        private string curUser;
+        private string curProfile;
+        private List<Project> projects = new List<Project>();
         private List<MeasuringArea> areas = new List<MeasuringArea>();
         private List<Customer> customers = new List<Customer>();
         public List<MeasuringAreaPointsCoords> areaPointsCoords = new List<MeasuringAreaPointsCoords>();
@@ -22,51 +26,55 @@ namespace SpectrometerMeasurementsApplication.Forms
         public List<ProfilePointsCoords> profilePoints = new List<ProfilePointsCoords>();
         public List<Picket> pickets = new List<Picket>();
         public List<PicketCoords> picketCoordsList = new List<PicketCoords>();
-        string curUser;
-        List<Project> projectsList = new List<Project>();
-        int last_id;
-        public AddCustomerForm(int id,string Username, List<Project> projects, List<Customer> customerslist, List<MeasuringArea> areaslist)
+        private Project currentProject;
+        private int ind;
+        public AddOperatorForm(string curprofile, Project curProject, string Username, List<Project> projectslist, List<Customer> customerslist, List<MeasuringArea> areaslist)
         {
             InitializeComponent();
+            currentProject = curProject;
             curUser = Username;
-            projectsList = projects;
+            projects = projectslist;
             customers = customerslist;
             areas = areaslist;
-            last_id = id;
+            curProfile = curprofile;
         }
 
-        private void AddCustomerForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void AddOperatorForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            MainForm form3 = new MainForm(curUser, projectsList, customers, areas);
-            form3.areaList = areas;
-            form3.areaPointsCoords = areaPointsCoords;
-            form3.areaProfiles = areaProfiles;
-            form3.operators = operators;
-            form3.profilePoints = profilePoints;
-            form3.pickets = pickets;
-            form3.picketCoordsList = picketCoordsList;
+            ProfileForm form6 = new ProfileForm(curProfile, currentProject, curUser, projects, customers, areas);
+            form6.areaPointsCoords = areaPointsCoords;
+            form6.areaProfiles = areaProfiles;
+            form6.operators = operators;
+            form6.profilePoints = profilePoints;
+            form6.pickets = pickets;
+            form6.picketCoordsList = picketCoordsList;
             this.Hide();
-            form3.Show();
+            form6.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (IsPhoneNumber(textBox1.Text))
+            if (IsPhoneNumber(textBoxPhone.Text))
             {
-                if(IsEmail(textBoxAddress.Text))
+                if (IsEmail(textBoxAddress.Text))
                 {
-                    last_id++;
-                    customers.Add(new Customer(last_id, textBoxName.Text, textBox1.Text, textBoxAddress.Text));
-                    MainForm form3 = new MainForm(curUser, projectsList, customers, areas);
-                    form3.customersList = customers;
-                    form3.areaPointsCoords = areaPointsCoords;
-                    form3.areaProfiles = areaProfiles;
-                    form3.operators = operators;
-                    form3.profilePoints = profilePoints;
-                    form3.pickets = pickets;
-                    form3.picketCoordsList = picketCoordsList;
+                    if (operators.Count <= 0)
+                    {
+                        ind = 0;
+                    }
+                    else
+                        ind = operators[operators.Count - 1].OperatorID;
+                    ind++;
+                    operators.Add(new Operator(ind, textBoxName.Text, textBox1.Text, textBoxPhone.Text, textBoxAddress.Text));
+                    ProfileForm form6 = new ProfileForm(curProfile, currentProject, curUser, projects, customers, areas);
+                    form6.areaPointsCoords = areaPointsCoords;
+                    form6.areaProfiles = areaProfiles;
+                    form6.operators = operators;
+                    form6.profilePoints = profilePoints;
+                    form6.pickets = pickets;
+                    form6.picketCoordsList = picketCoordsList;
                     this.Hide();
-                    form3.Show();
+                    form6.Show();
                 }
                 else
                 {

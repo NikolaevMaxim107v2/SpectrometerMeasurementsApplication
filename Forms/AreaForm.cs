@@ -22,6 +22,10 @@ namespace SpectrometerMeasurementsApplication
         private List<Customer> customers = new List<Customer>();
         public List<MeasuringAreaPointsCoords> areaPointsCoords = new List<MeasuringAreaPointsCoords>();
         public List<MeasuringAreaProfile> areaProfiles = new List<MeasuringAreaProfile>();
+        public List<Operator> operators = new List<Operator>();
+        public List<ProfilePointsCoords> profilePoints = new List<ProfilePointsCoords>();
+        public List<Picket> pickets = new List<Picket>();
+        public List<PicketCoords> picketCoordsList = new List<PicketCoords>();
         private List<string> areasList = new List<string>();
         private List<string> pointsList = new List<string>();
         private List<string> profilesList = new List<string>();
@@ -65,11 +69,18 @@ namespace SpectrometerMeasurementsApplication
 
         private void button5_Click(object sender, EventArgs e)
         {
-            ProfileForm form6 = new ProfileForm(currentProject,curUser,projects,customers,areas);
-            form6.areaPointsCoords = areaPointsCoords;
-            form6.areaProfiles = areaProfiles;
-            this.Hide();
-            form6.Show();
+            if (profilesList.Count > 0)
+            {
+                ProfileForm form6 = new ProfileForm(comboBox3.SelectedItem.ToString(), currentProject, curUser, projects, customers, areas);
+                form6.areaPointsCoords = areaPointsCoords;
+                form6.areaProfiles = areaProfiles;
+                form6.operators = operators;
+                form6.profilePoints = profilePoints;
+                form6.pickets = pickets;
+                form6.picketCoordsList = picketCoordsList;
+                this.Hide();
+                form6.Show();
+            }                      
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -77,6 +88,10 @@ namespace SpectrometerMeasurementsApplication
             ProjectDataForm form4 = new ProjectDataForm(currentProject, curUser, projects, customers, areas);
             form4.areaPointsCoords = areaPointsCoords;
             form4.areaProfiles = areaProfiles;
+            form4.operators = operators;
+            form4.profilePoints = profilePoints;
+            form4.pickets = pickets;
+            form4.picketCoordsList = picketCoordsList;
             this.Hide();
             form4.Show();
         }
@@ -91,6 +106,10 @@ namespace SpectrometerMeasurementsApplication
             AddAreaPointsForm addAreaPointsForm = new AddAreaPointsForm(currentProject, curUser, projects, customers, areas);
             addAreaPointsForm.areaPointsCoords = areaPointsCoords;
             addAreaPointsForm.areaProfiles = areaProfiles;
+            addAreaPointsForm.operators = operators;
+            addAreaPointsForm.profilePoints = profilePoints;
+            addAreaPointsForm.pickets = pickets;
+            addAreaPointsForm.picketCoordsList = picketCoordsList; 
             this.Hide();
             addAreaPointsForm.ShowDialog();
         }
@@ -175,7 +194,7 @@ namespace SpectrometerMeasurementsApplication
                     profilesList.Remove(profilesList[j]);
                 }
             comboBox3.DataSource = null;
-            comboBox3.Items.Remove(comboBox2.SelectedItem);
+            comboBox3.Items.Remove(comboBox3.SelectedItem);
             comboBox3.DataSource = profilesList;
         }
     }

@@ -20,6 +20,10 @@ namespace SpectrometerMeasurementsApplication.Forms
         private List<Customer> customers = new List<Customer>();
         public List<MeasuringAreaPointsCoords> areaPointsCoords = new List<MeasuringAreaPointsCoords>();
         public List<MeasuringAreaProfile> areaProfiles = new List<MeasuringAreaProfile>();
+        public List<ProfilePointsCoords> profilePoints = new List<ProfilePointsCoords>();
+        public List<Operator> operators = new List<Operator>();
+        public List<Picket> pickets = new List<Picket>();
+        public List<PicketCoords> picketCoordsList = new List<PicketCoords>();
         string curUser;
         List<Project> projectsList = new List<Project>();
         List<string> projectsNames = new List<string>();
@@ -43,6 +47,10 @@ namespace SpectrometerMeasurementsApplication.Forms
             MainForm form3 = new MainForm(curUser, projectsList, customers, areas);
             form3.areaPointsCoords = areaPointsCoords;
             form3.areaProfiles = areaProfiles;
+            form3.operators = operators;
+            form3.profilePoints = profilePoints;
+            form3.pickets = pickets;
+            form3.picketCoordsList = picketCoordsList;
             this.Hide();
             form3.Show();
         }
@@ -59,6 +67,10 @@ namespace SpectrometerMeasurementsApplication.Forms
             form3.projectsList = projectsList;
             form3.areaPointsCoords = areaPointsCoords;
             form3.areaProfiles = areaProfiles;
+            form3.operators = operators;
+            form3.profilePoints = profilePoints;
+            form3.pickets = pickets;
+            form3.picketCoordsList = picketCoordsList;
             this.Hide();
             form3.Show();
         }

@@ -65,6 +65,7 @@
             button1.TabIndex = 45;
             button1.Text = "Удалить";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button7
             // 
@@ -74,6 +75,7 @@
             button7.TabIndex = 43;
             button7.Text = "Добавить";
             button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
             // 
             // button2
             // 
@@ -92,6 +94,7 @@
             button3.TabIndex = 41;
             button3.Text = "Удалить";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // button4
             // 
@@ -101,6 +104,7 @@
             button4.TabIndex = 40;
             button4.Text = "Добавить";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // label1
             // 
@@ -186,6 +190,7 @@
             button5.TabIndex = 56;
             button5.Text = "Удалить";
             button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
             // button8
             // 
@@ -195,6 +200,7 @@
             button8.TabIndex = 54;
             button8.Text = "Добавить";
             button8.UseVisualStyleBackColor = true;
+            button8.Click += button8_Click;
             // 
             // button9
             // 

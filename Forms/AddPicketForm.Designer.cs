@@ -1,6 +1,6 @@
 ﻿namespace SpectrometerMeasurementsApplication.Forms
 {
-    partial class AddAreaForm
+    partial class AddPicketForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,31 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            comboBox1 = new ComboBox();
+            label4 = new Label();
+            textBoxY = new TextBox();
             label2 = new Label();
             label1 = new Label();
-            textBoxName = new TextBox();
             launchText = new Label();
             button1 = new Button();
+            textBoxX = new TextBox();
+            comboBox1 = new ComboBox();
             SuspendLayout();
             // 
-            // comboBox1
+            // label4
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(86, 73);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(544, 23);
-            comboBox1.TabIndex = 29;
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(67, 70);
+            label4.Name = "label4";
+            label4.Size = new Size(100, 19);
+            label4.TabIndex = 49;
+            label4.Text = "Координата X:";
+            label4.TextAlign = ContentAlignment.TopCenter;
+            label4.UseMnemonic = false;
+            // 
+            // textBoxY
+            // 
+            textBoxY.Location = new Point(178, 99);
+            textBoxY.Name = "textBoxY";
+            textBoxY.PlaceholderText = "Введите координаты Y...";
+            textBoxY.RightToLeft = RightToLeft.No;
+            textBoxY.Size = new Size(425, 23);
+            textBoxY.TabIndex = 47;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(14, 73);
+            label2.Location = new Point(67, 100);
             label2.Name = "label2";
-            label2.Size = new Size(58, 19);
-            label2.TabIndex = 26;
-            label2.Text = "Проект:";
+            label2.Size = new Size(100, 19);
+            label2.TabIndex = 44;
+            label2.Text = "Координата Y:";
             label2.TextAlign = ContentAlignment.TopCenter;
             label2.UseMnemonic = false;
             // 
@@ -60,70 +75,83 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(14, 44);
+            label1.Location = new Point(92, 41);
             label1.Name = "label1";
-            label1.Size = new Size(72, 19);
-            label1.TabIndex = 25;
-            label1.Text = "Название:";
+            label1.Size = new Size(75, 19);
+            label1.TabIndex = 43;
+            label1.Text = "Оператор:";
             label1.TextAlign = ContentAlignment.TopCenter;
             label1.UseMnemonic = false;
-            // 
-            // textBoxName
-            // 
-            textBoxName.Location = new Point(86, 44);
-            textBoxName.Name = "textBoxName";
-            textBoxName.PlaceholderText = "Введите название площади...";
-            textBoxName.RightToLeft = RightToLeft.No;
-            textBoxName.Size = new Size(544, 23);
-            textBoxName.TabIndex = 24;
             // 
             // launchText
             // 
             launchText.AutoSize = true;
             launchText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            launchText.Location = new Point(281, 9);
+            launchText.Location = new Point(257, 11);
             launchText.Name = "launchText";
-            launchText.Size = new Size(148, 19);
-            launchText.TabIndex = 23;
-            launchText.Text = "Добавление площади";
+            launchText.Size = new Size(133, 19);
+            launchText.TabIndex = 41;
+            launchText.Text = "Добавление пикета";
             launchText.TextAlign = ContentAlignment.TopCenter;
             launchText.UseMnemonic = false;
             // 
             // button1
             // 
-            button1.Location = new Point(204, 112);
+            button1.Location = new Point(214, 143);
             button1.Name = "button1";
-            button1.Size = new Size(325, 25);
-            button1.TabIndex = 22;
+            button1.Size = new Size(253, 22);
+            button1.TabIndex = 40;
             button1.Text = "Добавить";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // AddAreaForm
+            // textBoxX
+            // 
+            textBoxX.Location = new Point(178, 70);
+            textBoxX.Name = "textBoxX";
+            textBoxX.PlaceholderText = "Введите координаты Х...";
+            textBoxX.RightToLeft = RightToLeft.No;
+            textBoxX.Size = new Size(425, 23);
+            textBoxX.TabIndex = 48;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(178, 40);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(425, 23);
+            comboBox1.TabIndex = 50;
+            // 
+            // AddPicketForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(652, 162);
+            ClientSize = new Size(657, 190);
             Controls.Add(comboBox1);
+            Controls.Add(label4);
+            Controls.Add(textBoxX);
+            Controls.Add(textBoxY);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(textBoxName);
             Controls.Add(launchText);
             Controls.Add(button1);
-            Name = "AddAreaForm";
-            Text = "Добавить площадь";
-            FormClosed += AddAreaForm_FormClosed;
+            Name = "AddPicketForm";
+            Text = "Добавление пикета";
+            FormClosed += AddPicketForm_FormClosed;
+            Load += AddPicketForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private ComboBox comboBox1;
+        private Label label4;
+        public TextBox textBoxY;
         private Label label2;
         private Label label1;
-        public TextBox textBoxName;
         private Label launchText;
         private Button button1;
+        public TextBox textBoxX;
+        private ComboBox comboBox1;
     }
 }

@@ -56,7 +56,7 @@
             textBoxAddress.Name = "textBoxAddress";
             textBoxAddress.PlaceholderText = "Введите email...";
             textBoxAddress.RightToLeft = RightToLeft.No;
-            textBoxAddress.Size = new Size(253, 23);
+            textBoxAddress.Size = new Size(425, 23);
             textBoxAddress.TabIndex = 27;
             // 
             // label2
@@ -89,14 +89,14 @@
             textBoxName.Name = "textBoxName";
             textBoxName.PlaceholderText = "Введите ФИО/Название...";
             textBoxName.RightToLeft = RightToLeft.No;
-            textBoxName.Size = new Size(253, 23);
+            textBoxName.Size = new Size(425, 23);
             textBoxName.TabIndex = 24;
             // 
             // launchText
             // 
             launchText.AutoSize = true;
             launchText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            launchText.Location = new Point(150, 9);
+            launchText.Location = new Point(249, 9);
             launchText.Name = "launchText";
             launchText.Size = new Size(153, 19);
             launchText.TabIndex = 23;
@@ -106,7 +106,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(90, 141);
+            button1.Location = new Point(201, 140);
             button1.Name = "button1";
             button1.Size = new Size(253, 22);
             button1.TabIndex = 22;
@@ -120,14 +120,14 @@
             textBox1.Name = "textBox1";
             textBox1.PlaceholderText = "Введите номер телефона...";
             textBox1.RightToLeft = RightToLeft.No;
-            textBox1.Size = new Size(253, 23);
+            textBox1.Size = new Size(425, 23);
             textBox1.TabIndex = 29;
             // 
             // AddCustomerForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(460, 175);
+            ClientSize = new Size(637, 184);
             Controls.Add(textBox1);
             Controls.Add(label3);
             Controls.Add(textBoxAddress);

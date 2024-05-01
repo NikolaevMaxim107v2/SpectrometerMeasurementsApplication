@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,10 @@ namespace SpectrometerMeasurementsApplication.Forms
         List<MeasuringArea> areas = new List<MeasuringArea>();
         public List<MeasuringAreaPointsCoords> areaPointsCoords = new List<MeasuringAreaPointsCoords>();
         public List<MeasuringAreaProfile> areaProfiles = new List<MeasuringAreaProfile>();
+        public List<Operator> operators = new List<Operator>();
+        public List<ProfilePointsCoords> profilePoints = new List<ProfilePointsCoords>();
+        public List<Picket> pickets = new List<Picket>();
+        public List<PicketCoords> picketCoordsList = new List<PicketCoords>();
         List<string> customerslist = new List<string>();
         int lastProjectID;
         string curUser;
@@ -43,6 +48,9 @@ namespace SpectrometerMeasurementsApplication.Forms
             MainForm form3 = new MainForm(curUser, projectsList, customersList, areas);
             form3.areaPointsCoords = areaPointsCoords;
             form3.areaProfiles = areaProfiles;
+            form3.profilePoints = profilePoints;
+            form3.pickets = pickets;
+            form3.picketCoordsList = picketCoordsList;
             this.Hide();
             form3.Show();
         }
@@ -52,6 +60,10 @@ namespace SpectrometerMeasurementsApplication.Forms
             MainForm form3 = new MainForm(curUser, projectsList, customersList, areas);
             form3.areaPointsCoords = areaPointsCoords;
             form3.areaProfiles = areaProfiles;
+            form3.operators = operators;
+            form3.profilePoints = profilePoints;
+            form3.pickets = pickets;
+            form3.picketCoordsList = picketCoordsList;
             this.Hide();
             form3.Show();
         }

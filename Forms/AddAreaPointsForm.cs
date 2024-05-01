@@ -21,6 +21,10 @@ namespace SpectrometerMeasurementsApplication.Forms
         private List<Customer> customers = new List<Customer>();
         public List<MeasuringAreaPointsCoords> areaPointsCoords = new List<MeasuringAreaPointsCoords>();
         public List<MeasuringAreaProfile> areaProfiles = new List<MeasuringAreaProfile>();
+        public List<Operator> operators = new List<Operator>();
+        public List<ProfilePointsCoords> profilePoints = new List<ProfilePointsCoords>();
+        public List<Picket> pickets = new List<Picket>();
+        public List<PicketCoords> picketCoordsList = new List<PicketCoords>();
         private List<string> areasList = new List<string>();
         private Project currentProject;
         private int last_point_ind;
@@ -52,9 +56,13 @@ namespace SpectrometerMeasurementsApplication.Forms
 
         private void AddAreaPointsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-                        AreaForm form5 = new AreaForm(currentProject, curUser, projects, customers, areas);
+            AreaForm form5 = new AreaForm(currentProject, curUser, projects, customers, areas);
             form5.areaPointsCoords = areaPointsCoords;
             form5.areaProfiles = areaProfiles;
+            form5.operators = operators;
+            form5.profilePoints = profilePoints;
+            form5.pickets = pickets;
+            form5.picketCoordsList = picketCoordsList;
             this.Hide();
             form5.Show();
         }
@@ -70,6 +78,10 @@ namespace SpectrometerMeasurementsApplication.Forms
             AreaForm form5 = new AreaForm(currentProject, curUser, projects, customers, areas);
             form5.areaPointsCoords = areaPointsCoords;
             form5.areaProfiles = areaProfiles;
+            form5.operators = operators;
+            form5.profilePoints = profilePoints;
+            form5.pickets = pickets;
+            form5.picketCoordsList = picketCoordsList;
             this.Hide();
             form5.Show();
         }
