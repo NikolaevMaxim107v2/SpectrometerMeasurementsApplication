@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -86,6 +87,7 @@ namespace SpectrometerMeasurementsApplication
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+
             projectsTable.Columns.Add("ID", Type.GetType("System.Int32"));
             projectsTable.Columns.Add("Name", Type.GetType("System.String"));
             projectsTable.Columns.Add("Customer ID", Type.GetType("System.Int32"));
