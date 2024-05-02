@@ -37,7 +37,7 @@ namespace SpectrometerMeasurementsApplication.Forms
             customers = customerslist;
             areas = areaslist;
             last_id = id;
-            foreach(Project project in projectsList)
+            foreach (Project project in projectsList)
                 projectsNames.Add(project.ProjectID + " | " + project.ProjectName);
             comboBox1.DataSource = projectsNames;
         }

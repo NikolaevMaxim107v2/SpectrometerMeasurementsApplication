@@ -25,7 +25,7 @@ namespace SpectrometerMeasurementsApplication.Forms
         string curUser;
         List<Project> projectsList = new List<Project>();
         int last_id;
-        public AddCustomerForm(int id,string Username, List<Project> projects, List<Customer> customerslist, List<MeasuringArea> areaslist)
+        public AddCustomerForm(int id, string Username, List<Project> projects, List<Customer> customerslist, List<MeasuringArea> areaslist)
         {
             InitializeComponent();
             curUser = Username;
@@ -53,7 +53,7 @@ namespace SpectrometerMeasurementsApplication.Forms
         {
             if (IsPhoneNumber(textBox1.Text))
             {
-                if(IsEmail(textBoxAddress.Text))
+                if (IsEmail(textBoxAddress.Text))
                 {
                     last_id++;
                     customers.Add(new Customer(last_id, textBoxName.Text, textBox1.Text, textBoxAddress.Text));

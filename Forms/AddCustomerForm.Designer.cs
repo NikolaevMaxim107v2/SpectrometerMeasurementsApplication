@@ -42,9 +42,9 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(21, 97);
+            label3.Location = new Point(24, 129);
             label3.Name = "label3";
-            label3.Size = new Size(138, 19);
+            label3.Size = new Size(169, 23);
             label3.TabIndex = 28;
             label3.Text = "Электронный адрес:";
             label3.TextAlign = ContentAlignment.TopCenter;
@@ -52,20 +52,21 @@
             // 
             // textBoxAddress
             // 
-            textBoxAddress.Location = new Point(170, 97);
+            textBoxAddress.Location = new Point(194, 129);
+            textBoxAddress.Margin = new Padding(3, 4, 3, 4);
             textBoxAddress.Name = "textBoxAddress";
             textBoxAddress.PlaceholderText = "Введите email...";
             textBoxAddress.RightToLeft = RightToLeft.No;
-            textBoxAddress.Size = new Size(425, 23);
+            textBoxAddress.Size = new Size(485, 27);
             textBoxAddress.TabIndex = 27;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(21, 68);
+            label2.Location = new Point(24, 91);
             label2.Name = "label2";
-            label2.Size = new Size(119, 19);
+            label2.Size = new Size(147, 23);
             label2.TabIndex = 26;
             label2.Text = "Номер телефона:";
             label2.TextAlign = ContentAlignment.TopCenter;
@@ -75,9 +76,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(21, 40);
+            label1.Location = new Point(15, 53);
             label1.Name = "label1";
-            label1.Size = new Size(143, 19);
+            label1.Size = new Size(178, 23);
             label1.TabIndex = 25;
             label1.Text = "ФИО/Наименование:";
             label1.TextAlign = ContentAlignment.TopCenter;
@@ -85,20 +86,21 @@
             // 
             // textBoxName
             // 
-            textBoxName.Location = new Point(170, 39);
+            textBoxName.Location = new Point(194, 52);
+            textBoxName.Margin = new Padding(3, 4, 3, 4);
             textBoxName.Name = "textBoxName";
             textBoxName.PlaceholderText = "Введите ФИО/Название...";
             textBoxName.RightToLeft = RightToLeft.No;
-            textBoxName.Size = new Size(425, 23);
+            textBoxName.Size = new Size(485, 27);
             textBoxName.TabIndex = 24;
             // 
             // launchText
             // 
             launchText.AutoSize = true;
             launchText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            launchText.Location = new Point(249, 9);
+            launchText.Location = new Point(285, 12);
             launchText.Name = "launchText";
-            launchText.Size = new Size(153, 19);
+            launchText.Size = new Size(191, 23);
             launchText.TabIndex = 23;
             launchText.Text = "Добавление заказчика";
             launchText.TextAlign = ContentAlignment.TopCenter;
@@ -106,9 +108,10 @@
             // 
             // button1
             // 
-            button1.Location = new Point(201, 140);
+            button1.Location = new Point(230, 187);
+            button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
-            button1.Size = new Size(253, 22);
+            button1.Size = new Size(289, 29);
             button1.TabIndex = 22;
             button1.Text = "Добавить";
             button1.UseVisualStyleBackColor = true;
@@ -116,18 +119,19 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(170, 68);
+            textBox1.Location = new Point(194, 91);
+            textBox1.Margin = new Padding(3, 4, 3, 4);
             textBox1.Name = "textBox1";
             textBox1.PlaceholderText = "Введите номер телефона...";
             textBox1.RightToLeft = RightToLeft.No;
-            textBox1.Size = new Size(425, 23);
+            textBox1.Size = new Size(485, 27);
             textBox1.TabIndex = 29;
             // 
             // AddCustomerForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(637, 184);
+            ClientSize = new Size(728, 245);
             Controls.Add(textBox1);
             Controls.Add(label3);
             Controls.Add(textBoxAddress);
@@ -136,6 +140,7 @@
             Controls.Add(textBoxName);
             Controls.Add(launchText);
             Controls.Add(button1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "AddCustomerForm";
             Text = "Добавление заказчика";
             FormClosed += AddCustomerForm_FormClosed;

@@ -34,7 +34,7 @@ namespace SpectrometerMeasurementsApplication.Forms
             customersList = customers;
             areas = areaslist;
             curUser = Username;
-            foreach(Customer cust in customersList) 
+            foreach (Customer cust in customersList)
             {
                 customerslist.Add(cust.CustomerID.ToString() + " | " + cust.CustomerName + " | " + cust.Phone + " | " + cust.Email);
             }
@@ -44,7 +44,7 @@ namespace SpectrometerMeasurementsApplication.Forms
         private void button1_Click(object sender, EventArgs e)
         {
             lastProjectID++;
-            projectsList.Add(new Project(lastProjectID, textBoxName.Text, comboBox1.SelectedIndex+1, null, DateTime.Now.Date, null));
+            projectsList.Add(new Project(lastProjectID, textBoxName.Text, comboBox1.SelectedIndex + 1, null, DateTime.Now.Date, null));
             MainForm form3 = new MainForm(curUser, projectsList, customersList, areas);
             form3.areaPointsCoords = areaPointsCoords;
             form3.areaProfiles = areaProfiles;

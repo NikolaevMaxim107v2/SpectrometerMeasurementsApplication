@@ -38,20 +38,21 @@
             // 
             // textBoxName
             // 
-            textBoxName.Location = new Point(106, 53);
+            textBoxName.Location = new Point(121, 71);
+            textBoxName.Margin = new Padding(3, 4, 3, 4);
             textBoxName.Name = "textBoxName";
             textBoxName.PlaceholderText = "Введите название проекта...";
             textBoxName.RightToLeft = RightToLeft.No;
-            textBoxName.Size = new Size(253, 23);
+            textBoxName.Size = new Size(289, 27);
             textBoxName.TabIndex = 8;
             // 
             // launchText
             // 
             launchText.AutoSize = true;
             launchText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            launchText.Location = new Point(133, 18);
+            launchText.Location = new Point(152, 24);
             launchText.Name = "launchText";
-            launchText.Size = new Size(141, 19);
+            launchText.Size = new Size(175, 23);
             launchText.TabIndex = 7;
             launchText.Text = "Добавление проекта";
             launchText.TextAlign = ContentAlignment.TopCenter;
@@ -59,9 +60,10 @@
             // 
             // button1
             // 
-            button1.Location = new Point(72, 120);
+            button1.Location = new Point(82, 160);
+            button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
-            button1.Size = new Size(253, 22);
+            button1.Size = new Size(289, 29);
             button1.TabIndex = 6;
             button1.Text = "Добавить";
             button1.UseVisualStyleBackColor = true;
@@ -71,9 +73,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(34, 53);
+            label1.Location = new Point(25, 71);
             label1.Name = "label1";
-            label1.Size = new Size(72, 19);
+            label1.Size = new Size(90, 23);
             label1.TabIndex = 9;
             label1.Text = "Название:";
             label1.TextAlign = ContentAlignment.TopCenter;
@@ -83,9 +85,9 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(34, 82);
+            label2.Location = new Point(39, 109);
             label2.Name = "label2";
-            label2.Size = new Size(70, 19);
+            label2.Size = new Size(85, 23);
             label2.TabIndex = 11;
             label2.Text = "Заказчик:";
             label2.TextAlign = ContentAlignment.TopCenter;
@@ -94,22 +96,24 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(106, 82);
+            comboBox1.Location = new Point(121, 109);
+            comboBox1.Margin = new Padding(3, 4, 3, 4);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(254, 23);
+            comboBox1.Size = new Size(290, 28);
             comboBox1.TabIndex = 21;
             // 
             // AddProjectForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(403, 165);
+            ClientSize = new Size(461, 220);
             Controls.Add(comboBox1);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(textBoxName);
             Controls.Add(launchText);
             Controls.Add(button1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "AddProjectForm";
             Text = "Добавить проект";
             FormClosed += AddProjectForm_FormClosed;

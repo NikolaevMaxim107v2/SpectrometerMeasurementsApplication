@@ -39,18 +39,19 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(86, 73);
+            comboBox1.Location = new Point(120, 97);
+            comboBox1.Margin = new Padding(3, 4, 3, 4);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(544, 23);
+            comboBox1.Size = new Size(621, 28);
             comboBox1.TabIndex = 29;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(14, 73);
+            label2.Location = new Point(36, 98);
             label2.Name = "label2";
-            label2.Size = new Size(58, 19);
+            label2.Size = new Size(70, 23);
             label2.TabIndex = 26;
             label2.Text = "Проект:";
             label2.TextAlign = ContentAlignment.TopCenter;
@@ -60,9 +61,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(14, 44);
+            label1.Location = new Point(16, 59);
             label1.Name = "label1";
-            label1.Size = new Size(72, 19);
+            label1.Size = new Size(90, 23);
             label1.TabIndex = 25;
             label1.Text = "Название:";
             label1.TextAlign = ContentAlignment.TopCenter;
@@ -70,20 +71,21 @@
             // 
             // textBoxName
             // 
-            textBoxName.Location = new Point(86, 44);
+            textBoxName.Location = new Point(119, 59);
+            textBoxName.Margin = new Padding(3, 4, 3, 4);
             textBoxName.Name = "textBoxName";
             textBoxName.PlaceholderText = "Введите название площади...";
             textBoxName.RightToLeft = RightToLeft.No;
-            textBoxName.Size = new Size(544, 23);
+            textBoxName.Size = new Size(621, 27);
             textBoxName.TabIndex = 24;
             // 
             // launchText
             // 
             launchText.AutoSize = true;
             launchText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            launchText.Location = new Point(281, 9);
+            launchText.Location = new Point(321, 12);
             launchText.Name = "launchText";
-            launchText.Size = new Size(148, 19);
+            launchText.Size = new Size(183, 23);
             launchText.TabIndex = 23;
             launchText.Text = "Добавление площади";
             launchText.TextAlign = ContentAlignment.TopCenter;
@@ -91,9 +93,10 @@
             // 
             // button1
             // 
-            button1.Location = new Point(204, 112);
+            button1.Location = new Point(233, 149);
+            button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
-            button1.Size = new Size(325, 25);
+            button1.Size = new Size(371, 33);
             button1.TabIndex = 22;
             button1.Text = "Добавить";
             button1.UseVisualStyleBackColor = true;
@@ -101,15 +104,16 @@
             // 
             // AddAreaForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(652, 162);
+            ClientSize = new Size(782, 216);
             Controls.Add(comboBox1);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(textBoxName);
             Controls.Add(launchText);
             Controls.Add(button1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "AddAreaForm";
             Text = "Добавить площадь";
             FormClosed += AddAreaForm_FormClosed;

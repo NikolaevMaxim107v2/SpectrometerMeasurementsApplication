@@ -29,7 +29,7 @@ namespace SpectrometerMeasurementsApplication.Forms
         private Project currentProject;
         private int last_point_ind;
         private int rel_profile_id;
-        public AddProfilePointForm(string curprofile,Project curProject, string Username, List<Project> projectslist, List<Customer> customerslist, List<MeasuringArea> areaslist)
+        public AddProfilePointForm(string curprofile, Project curProject, string Username, List<Project> projectslist, List<Customer> customerslist, List<MeasuringArea> areaslist)
         {
             InitializeComponent();
             currentProject = curProject;
@@ -65,7 +65,7 @@ namespace SpectrometerMeasurementsApplication.Forms
             last_point_ind++;
             profilePoints.Add(new ProfilePointsCoords(last_point_ind, Convert.ToInt32(textBoxX.Text),
                 Convert.ToInt32(textBoxY.Text), rel_profile_id));
-            ProfileForm form6 = new ProfileForm(curProfile,currentProject, curUser, projects, customers, areas);
+            ProfileForm form6 = new ProfileForm(curProfile, currentProject, curUser, projects, customers, areas);
             form6.areaPointsCoords = areaPointsCoords;
             form6.areaProfiles = areaProfiles;
             form6.operators = operators;
