@@ -1,4 +1,5 @@
-﻿using SpectrometerMeasurementsApplication.Classes;
+﻿using Microsoft.Data.SqlClient;
+using SpectrometerMeasurementsApplication.Classes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,6 +30,8 @@ namespace SpectrometerMeasurementsApplication.Forms
         List<string> projectsNames = new List<string>();
         int rel_project_id;
         int last_id;
+        private static string conn = "Data Source=localhost\\SQLEXPRESS;" +
+            "Initial Catalog=NikolaevMD107v2_IndTask2;Integrated Security=True;trustServerCertificate=true";
         public AddAreaForm(int id, string Username, List<Project> projects, List<Customer> customerslist, List<MeasuringArea> areaslist)
         {
             InitializeComponent();
@@ -57,22 +60,40 @@ namespace SpectrometerMeasurementsApplication.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            foreach (Project project in projectsList)
-                if (comboBox1.SelectedItem.ToString().Split(" | ")[0] == project.ProjectID.ToString())
-                    rel_project_id = project.ProjectID;
-            last_id++;
-            areas.Add(new MeasuringArea(last_id, textBoxName.Text, rel_project_id));
-            MainForm form3 = new MainForm(curUser, projectsList, customers, areas);
-            form3.areaList = areas;
-            form3.projectsList = projectsList;
-            form3.areaPointsCoords = areaPointsCoords;
-            form3.areaProfiles = areaProfiles;
-            form3.operators = operators;
-            form3.profilePoints = profilePoints;
-            form3.pickets = pickets;
-            form3.picketCoordsList = picketCoordsList;
-            this.Hide();
-            form3.Show();
+            try
+            {
+                foreach (Project project in projectsList)
+                    if (comboBox1.SelectedItem.ToString().Split(" | ")[0] == project.ProjectID.ToString())
+                        rel_project_id = project.ProjectID;
+                using (SqlConnection con = new SqlConnection(conn))
+                {
+                    con.Open();
+                    MessageBox.Show("Соединение открыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    string projectComStr = $"INSERT INTO MeasuringArea(AreaName, ProjectID)" +
+                        $" VALUES ('{textBoxName.Text}', {rel_project_id})";
+                    SqlCommand projectCMD = new SqlCommand(projectComStr, con);
+                    projectCMD.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("Соединение закрыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                }
+                MainForm form3 = new MainForm(curUser, projectsList, customers, areas);
+                form3.areaList = areas;
+                form3.projectsList = projectsList;
+                form3.areaPointsCoords = areaPointsCoords;
+                form3.areaProfiles = areaProfiles;
+                form3.operators = operators;
+                form3.profilePoints = profilePoints;
+                form3.pickets = pickets;
+                form3.picketCoordsList = picketCoordsList;
+                MessageBox.Show("Успешное добавление!", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                this.Hide();
+                form3.Show();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка добавления! {ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

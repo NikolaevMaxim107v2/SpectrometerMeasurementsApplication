@@ -10,20 +10,20 @@ namespace SpectrometerMeasurementsApplication.Classes
     {
         private int _coordsID;
         private int _picketID;
-        private int _coordsX;
-        private int _coordsY;
+        private decimal _coordsX;
+        private decimal _coordsY;
 
-        public PicketCoords(int coordsID, int picketID, int coordsX, int coordsY)
+        public PicketCoords(int coordsID, int picketID, decimal coordsX, decimal coordsY)
         {
-            _coordsID = coordsID;
-            _picketID = picketID;
-            _coordsX = coordsX;
-            _coordsY = coordsY;
+            CoordsID = coordsID;
+            PicketID = picketID;
+            CoordsX = coordsX;
+            CoordsY = coordsY;
         }
 
         public int CoordsID { get { return _coordsID; } set { _coordsID = value; } }
         public int PicketID { get { return _picketID; } set { _picketID = value; } }        
-        public int CoordsX { get { return _coordsX; } set { _coordsX = value; } }
-        public int CoordsY { get { return _coordsY; } set { _coordsY = value; } }
+        public decimal CoordsX { get { return _coordsX; } set { _coordsX = value; } }
+        public decimal CoordsY { get { return _coordsY; } set { _coordsY = value; } }
     }
 }

@@ -1,4 +1,5 @@
-﻿using SpectrometerMeasurementsApplication.Classes;
+﻿using Microsoft.Data.SqlClient;
+using SpectrometerMeasurementsApplication.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SpectrometerMeasurementsApplication.Forms
 {
@@ -25,6 +27,8 @@ namespace SpectrometerMeasurementsApplication.Forms
         string curUser;
         List<Project> projectsList = new List<Project>();
         int last_id;
+        private static string conn = "Data Source=localhost\\SQLEXPRESS;" +
+            "Initial Catalog=NikolaevMD107v2_IndTask2;Integrated Security=True;trustServerCertificate=true";
         public AddCustomerForm(int id, string Username, List<Project> projects, List<Customer> customerslist, List<MeasuringArea> areaslist)
         {
             InitializeComponent();
@@ -55,18 +59,36 @@ namespace SpectrometerMeasurementsApplication.Forms
             {
                 if (IsEmail(textBoxAddress.Text))
                 {
-                    last_id++;
-                    customers.Add(new Customer(last_id, textBoxName.Text, textBox1.Text, textBoxAddress.Text));
-                    MainForm form3 = new MainForm(curUser, projectsList, customers, areas);
-                    form3.customersList = customers;
-                    form3.areaPointsCoords = areaPointsCoords;
-                    form3.areaProfiles = areaProfiles;
-                    form3.operators = operators;
-                    form3.profilePoints = profilePoints;
-                    form3.pickets = pickets;
-                    form3.picketCoordsList = picketCoordsList;
-                    this.Hide();
-                    form3.Show();
+                    try
+                    {
+                        using (SqlConnection con = new SqlConnection(conn))
+                        {
+                            con.Open();
+                            MessageBox.Show("Соединение открыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                            string projectComStr = $"INSERT INTO Customer(CustomerName, Email, Phone)" +
+                                $" VALUES ('{textBoxName.Text}', '{textBoxAddress.Text}', '{textBox1.Text}')";
+                            SqlCommand projectCMD = new SqlCommand(projectComStr, con);
+                            projectCMD.ExecuteNonQuery();
+                            con.Close();
+                            MessageBox.Show("Соединение закрыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        }
+                        MainForm form3 = new MainForm(curUser, projectsList, customers, areas);
+                        form3.customersList = customers;
+                        form3.areaPointsCoords = areaPointsCoords;
+                        form3.areaProfiles = areaProfiles;
+                        form3.operators = operators;
+                        form3.profilePoints = profilePoints;
+                        form3.pickets = pickets;
+                        form3.picketCoordsList = picketCoordsList;
+                        MessageBox.Show("Успешное добавление!", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        this.Hide();
+                        form3.Show();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Ошибка добавления! {ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {

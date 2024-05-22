@@ -1,4 +1,5 @@
-﻿using SpectrometerMeasurementsApplication.Classes;
+﻿using Microsoft.Data.SqlClient;
+using SpectrometerMeasurementsApplication.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,6 +30,8 @@ namespace SpectrometerMeasurementsApplication.Forms
         private Project currentProject;
         private int last_point_ind;
         private int rel_profile_id;
+        private static string conn = "Data Source=localhost\\SQLEXPRESS;" +
+            "Initial Catalog=NikolaevMD107v2_IndTask2;Integrated Security=True;trustServerCertificate=true";
         public AddProfilePointForm(string curprofile, Project curProject, string Username, List<Project> projectslist, List<Customer> customerslist, List<MeasuringArea> areaslist)
         {
             InitializeComponent();
@@ -56,24 +59,34 @@ namespace SpectrometerMeasurementsApplication.Forms
         private void button1_Click(object sender, EventArgs e)
         {
             rel_profile_id = Convert.ToInt32(curProfile.Split(" | ")[0]);
-            if (profilePoints.Count == 0)
+            try
             {
-                last_point_ind = 0;
+                using (SqlConnection con = new SqlConnection(conn))
+                {
+                    con.Open();
+                    MessageBox.Show("Соединение открыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    string projectComStr = $"INSERT INTO ProfilePointsCoords(CoordsX, CoordsY, ProfileID)" +
+                        $" VALUES ({textBoxX.Text}, {textBoxY.Text}, {rel_profile_id})";
+                    SqlCommand projectCMD = new SqlCommand(projectComStr, con);
+                    projectCMD.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("Соединение закрыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                }
+                ProfileForm form6 = new ProfileForm(curProfile, currentProject, curUser, projects, customers, areas);
+                form6.areaPointsCoords = areaPointsCoords;
+                form6.areaProfiles = areaProfiles;
+                form6.operators = operators;
+                form6.profilePoints = profilePoints;
+                form6.pickets = pickets;
+                form6.picketCoordsList = picketCoordsList;
+                MessageBox.Show("Успешное добавление!", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                this.Hide();
+                form6.Show();
             }
-            else
-                last_point_ind = profilePoints[profilePoints.Count - 1].CoordsID;
-            last_point_ind++;
-            profilePoints.Add(new ProfilePointsCoords(last_point_ind, Convert.ToInt32(textBoxX.Text),
-                Convert.ToInt32(textBoxY.Text), rel_profile_id));
-            ProfileForm form6 = new ProfileForm(curProfile, currentProject, curUser, projects, customers, areas);
-            form6.areaPointsCoords = areaPointsCoords;
-            form6.areaProfiles = areaProfiles;
-            form6.operators = operators;
-            form6.profilePoints = profilePoints;
-            form6.pickets = pickets;
-            form6.picketCoordsList = picketCoordsList;
-            this.Hide();
-            form6.Show();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка добавления! {ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

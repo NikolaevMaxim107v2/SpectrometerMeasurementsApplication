@@ -45,14 +45,20 @@
             button5 = new Button();
             button8 = new Button();
             button9 = new Button();
+            button10 = new Button();
+            pictureBox1 = new PictureBox();
+            dataGridView1 = new DataGridView();
+            label5 = new Label();
+            button11 = new Button();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // button6
             // 
-            button6.Location = new Point(15, 506);
-            button6.Margin = new Padding(3, 4, 3, 4);
+            button6.Location = new Point(12, 12);
             button6.Name = "button6";
-            button6.Size = new Size(235, 32);
+            button6.Size = new Size(206, 29);
             button6.TabIndex = 47;
             button6.Text = "Назад";
             button6.UseVisualStyleBackColor = true;
@@ -60,10 +66,9 @@
             // 
             // button1
             // 
-            button1.Location = new Point(133, 279);
-            button1.Margin = new Padding(3, 4, 3, 4);
+            button1.Location = new Point(116, 246);
             button1.Name = "button1";
-            button1.Size = new Size(117, 35);
+            button1.Size = new Size(102, 26);
             button1.TabIndex = 45;
             button1.Text = "Удалить";
             button1.UseVisualStyleBackColor = true;
@@ -71,10 +76,9 @@
             // 
             // button7
             // 
-            button7.Location = new Point(14, 279);
-            button7.Margin = new Padding(3, 4, 3, 4);
+            button7.Location = new Point(12, 246);
             button7.Name = "button7";
-            button7.Size = new Size(117, 35);
+            button7.Size = new Size(102, 26);
             button7.TabIndex = 43;
             button7.Text = "Добавить";
             button7.UseVisualStyleBackColor = true;
@@ -82,20 +86,18 @@
             // 
             // button2
             // 
-            button2.Location = new Point(14, 279);
-            button2.Margin = new Padding(3, 4, 3, 4);
+            button2.Location = new Point(12, 246);
             button2.Name = "button2";
-            button2.Size = new Size(117, 35);
+            button2.Size = new Size(102, 26);
             button2.TabIndex = 44;
             button2.Text = "Добавить";
             button2.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            button3.Location = new Point(133, 396);
-            button3.Margin = new Padding(3, 4, 3, 4);
+            button3.Location = new Point(116, 334);
             button3.Name = "button3";
-            button3.Size = new Size(117, 35);
+            button3.Size = new Size(102, 26);
             button3.TabIndex = 41;
             button3.Text = "Удалить";
             button3.UseVisualStyleBackColor = true;
@@ -103,10 +105,9 @@
             // 
             // button4
             // 
-            button4.Location = new Point(14, 396);
-            button4.Margin = new Padding(3, 4, 3, 4);
+            button4.Location = new Point(12, 334);
             button4.Name = "button4";
-            button4.Size = new Size(117, 35);
+            button4.Size = new Size(102, 26);
             button4.TabIndex = 40;
             button4.Text = "Добавить";
             button4.UseVisualStyleBackColor = true;
@@ -115,9 +116,9 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(104, 333);
+            label1.Location = new Point(91, 287);
             label1.Name = "label1";
-            label1.Size = new Size(61, 20);
+            label1.Size = new Size(49, 15);
             label1.TabIndex = 39;
             label1.Text = "Пикеты";
             label1.TextAlign = ContentAlignment.TopCenter;
@@ -126,9 +127,9 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(79, 216);
+            label2.Location = new Point(69, 199);
             label2.Name = "label2";
-            label2.Size = new Size(116, 20);
+            label2.Size = new Size(93, 15);
             label2.TabIndex = 37;
             label2.Text = "Точки профиля";
             label2.TextAlign = ContentAlignment.TopCenter;
@@ -137,18 +138,17 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(14, 124);
-            comboBox1.Margin = new Padding(3, 4, 3, 4);
+            comboBox1.Location = new Point(12, 130);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(235, 28);
+            comboBox1.Size = new Size(206, 23);
             comboBox1.TabIndex = 48;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(93, 100);
+            label3.Location = new Point(81, 112);
             label3.Name = "label3";
-            label3.Size = new Size(89, 20);
+            label3.Size = new Size(70, 15);
             label3.TabIndex = 49;
             label3.Text = "Операторы";
             label3.TextAlign = ContentAlignment.TopCenter;
@@ -157,36 +157,33 @@
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(14, 240);
-            comboBox2.Margin = new Padding(3, 4, 3, 4);
+            comboBox2.Location = new Point(12, 217);
             comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(235, 28);
+            comboBox2.Size = new Size(206, 23);
             comboBox2.TabIndex = 50;
             // 
             // comboBox3
             // 
             comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(14, 357);
-            comboBox3.Margin = new Padding(3, 4, 3, 4);
+            comboBox3.Location = new Point(12, 305);
             comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(235, 28);
+            comboBox3.Size = new Size(206, 23);
             comboBox3.TabIndex = 51;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(14, 40);
-            textBox1.Margin = new Padding(3, 4, 3, 4);
+            textBox1.Location = new Point(12, 86);
             textBox1.Name = "textBox1";
             textBox1.ReadOnly = true;
-            textBox1.Size = new Size(235, 27);
+            textBox1.Size = new Size(206, 23);
             textBox1.TabIndex = 52;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(93, 16);
+            label4.Location = new Point(81, 68);
             label4.Name = "label4";
-            label4.Size = new Size(73, 20);
+            label4.Size = new Size(59, 15);
             label4.TabIndex = 53;
             label4.Text = "Профиль";
             label4.TextAlign = ContentAlignment.TopCenter;
@@ -194,10 +191,9 @@
             // 
             // button5
             // 
-            button5.Location = new Point(133, 163);
-            button5.Margin = new Padding(3, 4, 3, 4);
+            button5.Location = new Point(116, 159);
             button5.Name = "button5";
-            button5.Size = new Size(117, 35);
+            button5.Size = new Size(102, 26);
             button5.TabIndex = 56;
             button5.Text = "Удалить";
             button5.UseVisualStyleBackColor = true;
@@ -205,10 +201,9 @@
             // 
             // button8
             // 
-            button8.Location = new Point(14, 163);
-            button8.Margin = new Padding(3, 4, 3, 4);
+            button8.Location = new Point(12, 159);
             button8.Name = "button8";
-            button8.Size = new Size(117, 35);
+            button8.Size = new Size(102, 26);
             button8.TabIndex = 54;
             button8.Text = "Добавить";
             button8.UseVisualStyleBackColor = true;
@@ -216,19 +211,72 @@
             // 
             // button9
             // 
-            button9.Location = new Point(14, 163);
-            button9.Margin = new Padding(3, 4, 3, 4);
+            button9.Location = new Point(12, 159);
             button9.Name = "button9";
-            button9.Size = new Size(117, 35);
+            button9.Size = new Size(102, 26);
             button9.TabIndex = 55;
             button9.Text = "Добавить";
             button9.UseVisualStyleBackColor = true;
             // 
+            // button10
+            // 
+            button10.Location = new Point(258, 407);
+            button10.Name = "button10";
+            button10.Size = new Size(530, 31);
+            button10.TabIndex = 58;
+            button10.Text = "Нарисовать график данных пикетов";
+            button10.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
+            pictureBox1.Location = new Point(258, 205);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(530, 196);
+            pictureBox1.TabIndex = 57;
+            pictureBox1.TabStop = false;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(258, 36);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.Size = new Size(530, 163);
+            dataGridView1.TabIndex = 59;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(477, 12);
+            label5.Name = "label5";
+            label5.Size = new Size(97, 15);
+            label5.TabIndex = 60;
+            label5.Text = "Данные пикетов";
+            label5.TextAlign = ContentAlignment.TopCenter;
+            label5.UseMnemonic = false;
+            // 
+            // button11
+            // 
+            button11.Location = new Point(12, 407);
+            button11.Name = "button11";
+            button11.Size = new Size(206, 29);
+            button11.TabIndex = 61;
+            button11.Text = "Перейти к данным полётов";
+            button11.UseVisualStyleBackColor = true;
+            // 
             // ProfileForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
+            ClientSize = new Size(800, 450);
+            Controls.Add(button11);
+            Controls.Add(label5);
+            Controls.Add(dataGridView1);
+            Controls.Add(button10);
+            Controls.Add(pictureBox1);
             Controls.Add(button5);
             Controls.Add(button8);
             Controls.Add(button9);
@@ -246,11 +294,12 @@
             Controls.Add(button4);
             Controls.Add(label1);
             Controls.Add(label2);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "ProfileForm";
             Text = "Данные профиля";
             FormClosed += ProfileForm_FormClosed;
             Load += ProfileForm_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -274,5 +323,10 @@
         private Button button5;
         private Button button8;
         private Button button9;
+        private Button button10;
+        private PictureBox pictureBox1;
+        private DataGridView dataGridView1;
+        private Label label5;
+        private Button button11;
     }
 }

@@ -15,10 +15,10 @@ namespace SpectrometerMeasurementsApplication.Classes
 
         public FlightValues(int valuesID,  int flightDistance, int flightHeight, int flightID)
         {
-            _valuesID = valuesID;
-            _flightDistance = flightDistance;
-            _flightHeight = flightHeight;
-            _flightID = flightID;
+            ValuesID = valuesID;
+            FlightDistance = flightDistance;
+            FlightHeight = flightHeight;
+            FlightID = flightID;
         }
 
         public int ValuesID { get { return _valuesID; } set { _valuesID = value; } }

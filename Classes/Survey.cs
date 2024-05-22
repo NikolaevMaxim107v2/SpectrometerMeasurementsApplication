@@ -14,9 +14,9 @@ namespace SpectrometerMeasurementsApplication.Classes
 
         public Survey (int surveyID, int flightID, int operatorID)
         {
-            _surveyID = surveyID;
-            _flightID = flightID;
-            _operatorID = operatorID;
+            SurveyID = surveyID;
+            FlightID = flightID;
+            OperatorID = operatorID;
         }
         
         public int SurveyID { get {  return _surveyID; } set { _surveyID = value; } }

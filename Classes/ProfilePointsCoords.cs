@@ -9,21 +9,21 @@ namespace SpectrometerMeasurementsApplication.Classes
     public class ProfilePointsCoords
     {
         private int _coordsID;
-        private int _coordsX;
-        private int _coordsY;
+        private decimal _coordsX;
+        private decimal _coordsY;
         private int _profileID;
 
-        public ProfilePointsCoords(int coordsID, int coordsX, int coordsY, int profileID)
+        public ProfilePointsCoords(int coordsID, decimal coordsX, decimal coordsY, int profileID)
         {
-            _coordsID = coordsID;
-            _coordsX = coordsX;
-            _coordsY = coordsY;
-            _profileID = profileID;
+            CoordsID = coordsID;
+            CoordsX = coordsX;
+            CoordsY = coordsY;
+            ProfileID = profileID;
         }
 
         public int CoordsID {  get { return _coordsID; } set { _coordsID = value; } }
-        public int CoordsX { get { return _coordsX; } set { _coordsX = value; } }
-        public int CoordsY {  get { return _coordsY; } set { _coordsY = value; } }
+        public decimal CoordsX { get { return _coordsX; } set { _coordsX = value; } }
+        public decimal CoordsY {  get { return _coordsY; } set { _coordsY = value; } }
         public int ProfileID { get { return _profileID; } set { _profileID = value; } }
     }
 }

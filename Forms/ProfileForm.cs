@@ -1,4 +1,5 @@
-﻿using SpectrometerMeasurementsApplication.Classes;
+﻿using Microsoft.Data.SqlClient;
+using SpectrometerMeasurementsApplication.Classes;
 using SpectrometerMeasurementsApplication.Forms;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,8 @@ namespace SpectrometerMeasurementsApplication
         private List<string> picketsList = new List<string>();
         private Project currentProject;
         private int ind;
+        private static string conn = "Data Source=localhost\\SQLEXPRESS;" +
+        "Initial Catalog=NikolaevMD107v2_IndTask2;Integrated Security=True;trustServerCertificate=true";
         public ProfileForm(string curprofile, Project curProject, string Username, List<Project> projectslist, List<Customer> customerslist, List<MeasuringArea> areaslist)
         {
             InitializeComponent();
@@ -63,34 +66,92 @@ namespace SpectrometerMeasurementsApplication
 
         private void ProfileForm_Load(object sender, EventArgs e)
         {
+            operators = new List<Operator>();
+            profilePoints = new List<ProfilePointsCoords>();
+            pickets = new List<Picket>();
+            try
+            {
+                Operator _operator = null;
+                ProfilePointsCoords point = null;
+                using (SqlConnection con = new SqlConnection(conn))
+                {
+                    con.Open();
+                    //MessageBox.Show("Соединение открыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    string operatorsComStr = $"SELECT OperatorID, OperatorName, OperatorSurname, Phone, Email from Operator";
+                    SqlCommand operatorsCMD = new SqlCommand(operatorsComStr, con);
+                    SqlDataReader operatorsReader = operatorsCMD.ExecuteReader();
+                    if (operatorsReader.HasRows)
+                        while (operatorsReader.Read())
+                        {
+                            _operator = new Operator(operatorsReader.GetInt32(0), operatorsReader.GetString(1),
+                                operatorsReader.GetString(2), operatorsReader.GetString(3), operatorsReader.GetString(4));
+                            //MessageBox.Show("Заказчик считан", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                            operators.Add(_operator);
+                        }
+                    operatorsReader.Close();
+
+                    string pointsComStr = $"SELECT CoordsID, CoordsX, CoordsY, ProfileID from ProfilePointsCoords";
+                    SqlCommand pointCMD = new SqlCommand(pointsComStr, con);
+                    SqlDataReader pointsReader = pointCMD.ExecuteReader();
+                    if (pointsReader.HasRows)
+                        while (pointsReader.Read())
+                        {
+                            point = new ProfilePointsCoords(pointsReader.GetInt32(0), pointsReader.GetDecimal(1),
+                                pointsReader.GetDecimal(2), pointsReader.GetInt32(3));
+                            //MessageBox.Show("Заказчик считан", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                            profilePoints.Add(point);
+                        }
+                    pointsReader.Close();
+
+                    string picketsComStr = $"SELECT PicketID, ProfileID, OperatorID from Picket";
+                    SqlCommand picketsCMD = new SqlCommand(picketsComStr, con);
+                    SqlDataReader picketsReader = picketsCMD.ExecuteReader();
+                    if (picketsReader.HasRows)
+                        while (picketsReader.Read())
+                        {
+                            //MessageBox.Show("Заказчик считан", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                            pickets.Add(new Picket(picketsReader.GetInt32(0), picketsReader.GetInt32(1),
+                                picketsReader.GetInt32(2)));
+                        }
+                    picketsReader.Close();
+
+                    string picketsCoordsComStr = $"SELECT CoordsID, PicketID, CoordsX, CoordsY from PicketCoords";
+                    SqlCommand picketsCoordsCMD = new SqlCommand(picketsCoordsComStr, con);
+                    SqlDataReader picketsCoordsReader = picketsCoordsCMD.ExecuteReader();
+                    if (picketsCoordsReader.HasRows)
+                        while (picketsCoordsReader.Read())
+                        {
+                            //MessageBox.Show("Заказчик считан", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                            picketCoordsList.Add(new PicketCoords(picketsCoordsReader.GetInt32(0), picketsCoordsReader.GetInt32(1),
+                                picketsCoordsReader.GetDecimal(2), picketsCoordsReader.GetDecimal(3)));
+                        }
+                    picketsCoordsReader.Close();
+
+                    con.Close();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Не удалось считать все данные из БД, часть данных не будет отображена!",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            ind = Convert.ToInt32(curProfile.ToString().Split(" | ")[0]);
             foreach (Operator op in operators)
             {
                 operatorsList.Add(op.OperatorID + " | " + op.OperatorName + " | " + op.OperatorSurname + " | " + op.Phone + " | " + op.Email);
             }
-            if (profilePoints.Count == 0)
-            {
-                ind = 0;
-            }
-            else
-                ind = profilePoints[profilePoints.Count - 1].CoordsID;
             foreach (ProfilePointsCoords point in profilePoints)
             {
-                if (point.CoordsID == ind)
+                if (point.ProfileID == ind)
                 {
                     pointsList.Add(point.CoordsID + " | " + "X: " + point.CoordsX + " | " + "Y: " + point.CoordsY + " | " + "profileID: " + point.ProfileID);
                 }
             }
-            if (pickets.Count == 0)
-            {
-                ind = 0;
-            }
-            else
-                ind = pickets[pickets.Count - 1].PicketID;
             for (int j = 0; j < pickets.Count; j++)
             {
-                if (pickets[j].PicketID == ind)
+                if (pickets[j].ProfileID == ind)
                 {
-                    picketsList.Add(pickets[j].PicketID + pickets[j].ProfileID + " | " + "X: " + picketCoordsList[j].CoordsX + " | " + "Y: " + picketCoordsList[j].CoordsY);
+                    picketsList.Add(pickets[j].ProfileID + " | " + pickets[j].PicketID + " | " + "X: " + picketCoordsList[j].CoordsX + " | " + "Y: " + picketCoordsList[j].CoordsY);
                 }
             }
             comboBox1.DataSource = operatorsList;
@@ -113,19 +174,40 @@ namespace SpectrometerMeasurementsApplication
 
         private void button5_Click(object sender, EventArgs e)
         {
-            for (int j = 0; j < operators.Count; j++)
-                if (Convert.ToInt32(comboBox1.SelectedItem.ToString().Split(" | ")[0]) == operators[j].OperatorID)
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conn))
                 {
-                    operators.Remove(operators[j]);
+                    if (comboBox1.SelectedItem != null)
+                    {
+                        con.Open();
+                        MessageBox.Show("Соединение открыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        string projectComStr = $"DELETE Operator WHERE OperatorID = {comboBox1.SelectedItem.ToString().Split(" | ")[0]}";
+                        SqlCommand projectCMD = new SqlCommand(projectComStr, con);
+                        projectCMD.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Соединение закрыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        MessageBox.Show("Успешное удаление!", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    }
+                    for (int j = 0; j < operators.Count; j++)
+                        if (Convert.ToInt32(comboBox1.SelectedItem.ToString().Split(" | ")[0]) == operators[j].OperatorID)
+                        {
+                            operators.Remove(operators[j]);
+                        }
+                    for (int j = 0; j < operatorsList.Count; j++)
+                        if (operatorsList[j] == comboBox1.SelectedItem.ToString())
+                        {
+                            operatorsList.Remove(operatorsList[j]);
+                        }
+                    comboBox1.DataSource = null;
+                    comboBox1.Items.Remove(comboBox1.SelectedItem);
+                    comboBox1.DataSource = operatorsList;
                 }
-            for (int j = 0; j < operatorsList.Count; j++)
-                if (operatorsList[j] == comboBox1.SelectedItem.ToString())
-                {
-                    operatorsList.Remove(operatorsList[j]);
-                }
-            comboBox1.DataSource = null;
-            comboBox1.Items.Remove(comboBox1.SelectedItem);
-            comboBox1.DataSource = operatorsList;
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка удаления!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -143,37 +225,82 @@ namespace SpectrometerMeasurementsApplication
 
         private void button1_Click(object sender, EventArgs e)
         {
-            for (int j = 0; j < profilePoints.Count; j++)
-                if (Convert.ToInt32(comboBox2.SelectedItem.ToString().Split(" | ")[0]) == profilePoints[j].CoordsID)
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conn))
                 {
-                    profilePoints.Remove(profilePoints[j]);
+                    if (comboBox2.SelectedItem != null)
+                    {
+                        con.Open();
+                        MessageBox.Show("Соединение открыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        string projectComStr = $"DELETE ProfilePointsCoords WHERE CoordsID = {comboBox2.SelectedItem.ToString().Split(" | ")[0]}";
+                        SqlCommand projectCMD = new SqlCommand(projectComStr, con);
+                        projectCMD.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Соединение закрыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        MessageBox.Show("Успешное удаление!", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    }
+                    for (int j = 0; j < profilePoints.Count; j++)
+                        if (Convert.ToInt32(comboBox2.SelectedItem.ToString().Split(" | ")[0]) == profilePoints[j].CoordsID)
+                        {
+                            profilePoints.Remove(profilePoints[j]);
+                        }
+                    for (int j = 0; j < pointsList.Count; j++)
+                        if (pointsList[j] == comboBox2.SelectedItem.ToString())
+                        {
+                            pointsList.Remove(pointsList[j]);
+                        }
+                    comboBox2.DataSource = null;
+                    comboBox2.Items.Remove(comboBox2.SelectedItem);
+                    comboBox2.DataSource = pointsList;
                 }
-            for (int j = 0; j < pointsList.Count; j++)
-                if (pointsList[j] == comboBox2.SelectedItem.ToString())
-                {
-                    pointsList.Remove(pointsList[j]);
-                }
-            comboBox2.DataSource = null;
-            comboBox2.Items.Remove(comboBox2.SelectedItem);
-            comboBox2.DataSource = pointsList;
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка удаления!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            for (int j = 0; j < pickets.Count; j++)
-                if (Convert.ToInt32(comboBox3.SelectedItem.ToString().Split(" | ")[0]) == pickets[j].ProfileID)
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conn))
                 {
-                    pickets.Remove(pickets[j]);
-                    picketCoordsList.Remove(picketCoordsList[j]);
+                    if (comboBox3.SelectedItem != null)
+                    {
+                        con.Open();
+                        MessageBox.Show("Соединение открыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        string projectComStr = $"DELETE PicketCoords WHERE PicketID = {comboBox3.SelectedItem.ToString().Split(" | ")[1]}";
+                        SqlCommand projectCMD = new SqlCommand(projectComStr, con);
+                        projectCMD.ExecuteNonQuery();
+                        projectComStr = $"DELETE Picket WHERE PicketID = {comboBox3.SelectedItem.ToString().Split(" | ")[1]}";
+                        projectCMD = new SqlCommand(projectComStr, con);
+                        projectCMD.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Соединение закрыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        MessageBox.Show("Успешное удаление!", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    }
+                    for (int j = 0; j < pickets.Count; j++)
+                        if (Convert.ToInt32(comboBox3.SelectedItem.ToString().Split(" | ")[0]) == pickets[j].ProfileID)
+                        {
+                            pickets.Remove(pickets[j]);
+                            picketCoordsList.Remove(picketCoordsList[j]);
+                        }
+                    for (int j = 0; j < picketsList.Count; j++)
+                        if (picketsList[j] == comboBox3.SelectedItem.ToString())
+                        {
+                            picketsList.Remove(picketsList[j]);
+                        }
+                    comboBox3.DataSource = null;
+                    comboBox3.Items.Remove(comboBox3.SelectedItem);
+                    comboBox3.DataSource = picketsList;
                 }
-            for (int j = 0; j < picketsList.Count; j++)
-                if (picketsList[j] == comboBox3.SelectedItem.ToString())
-                {
-                    picketsList.Remove(picketsList[j]);
-                }
-            comboBox3.DataSource = null;
-            comboBox3.Items.Remove(comboBox3.SelectedItem);
-            comboBox3.DataSource = picketsList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка удаления! {ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -187,6 +314,21 @@ namespace SpectrometerMeasurementsApplication
             addPicketForm.picketCoordsList = picketCoordsList;
             this.Hide();
             addPicketForm.ShowDialog();
+        }
+
+        private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            comboBox3.DataSource = null;
+            picketsList.Clear();
+            ind = Convert.ToInt32(curProfile.ToString().Split(" | ")[0]);
+            for (int j = 0; j < pickets.Count; j++)
+            {
+                if (pickets[j].ProfileID == ind)
+                {
+                    picketsList.Add(pickets[j].ProfileID + " | " + pickets[j].PicketID + " | " + "X: " + picketCoordsList[j].CoordsX + " | " + "Y: " + picketCoordsList[j].CoordsY);
+                }
+            }
+            comboBox3.DataSource = picketsList;
         }
     }
 }

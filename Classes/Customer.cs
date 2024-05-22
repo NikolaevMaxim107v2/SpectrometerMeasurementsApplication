@@ -15,10 +15,10 @@ namespace SpectrometerMeasurementsApplication.Classes
 
         public Customer(int customerID, string name, string email, string phone)
         {
-            _customerID = customerID;
-            _name = name;
-            _email = email;
-            _phone = phone;
+            CustomerID = customerID;
+            CustomerName = name;
+            Email = email;
+            Phone = phone;
         }
 
         public int CustomerID { get => _customerID;  set { _customerID = value; } }

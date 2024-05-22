@@ -14,9 +14,9 @@ namespace SpectrometerMeasurementsApplication.Classes
     
         public Picket(int picketID, int profileID, int operatorID)
         {
-            _picketID = picketID;
-            _profileID = profileID;
-            _operatorID = operatorID; 
+            PicketID = picketID;
+            ProfileID = profileID;
+            OperatorID = operatorID; 
         }
 
         public int PicketID { get {  return _picketID; } set { _picketID = value; } }

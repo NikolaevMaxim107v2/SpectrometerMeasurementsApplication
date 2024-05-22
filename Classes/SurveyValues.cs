@@ -16,11 +16,11 @@ namespace SpectrometerMeasurementsApplication.Classes
 
         public SurveyValues(int valuesID, int surveyID, int picketID, int surveyScale, int radiationActivity)
         {
-            _valuesID = valuesID;
-            _surveyID = surveyID;
-            _picketID = picketID;
-            _surveyScale = surveyScale;
-            _radiationActivity = radiationActivity;
+            ValuesID = valuesID;
+            SurveyID = surveyID;
+            PicketID = picketID;
+            SurveyScale = surveyScale;
+            RadiationActivity = radiationActivity;
         }
 
         public int ValuesID { get { return _valuesID; } set { _valuesID = value; } }

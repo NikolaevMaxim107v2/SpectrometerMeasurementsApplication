@@ -1,4 +1,5 @@
-﻿using SpectrometerMeasurementsApplication.Classes;
+﻿using Microsoft.Data.SqlClient;
+using SpectrometerMeasurementsApplication.Classes;
 using SpectrometerMeasurementsApplication.Forms;
 using System;
 using System.Collections;
@@ -31,6 +32,8 @@ namespace SpectrometerMeasurementsApplication
         private List<string> profilesList = new List<string>();
         private Project currentProject;
         private int ind;
+        private static string conn = "Data Source=localhost\\SQLEXPRESS;" +
+                    "Initial Catalog=NikolaevMD107v2_IndTask2;Integrated Security=True;trustServerCertificate=true";
         public AreaForm(Project curProject, string Username, List<Project> projectslist, List<Customer> customerslist, List<MeasuringArea> areaslist)
         {
             InitializeComponent();
@@ -47,13 +50,6 @@ namespace SpectrometerMeasurementsApplication
                 }
             }
             ind = 0;
-            foreach (MeasuringAreaPointsCoords point in areaPointsCoords)
-            {
-                if (point.AreaID == ind)
-                {
-                    pointsList.Add(point.CoordsID + " | " + "X: " + point.CoordsX + " | " + "Y: " + point.CoordsY + " | " + "areaID: " + point.AreaID);
-                }
-            }
             foreach (MeasuringAreaProfile profile in areaProfiles)
             {
                 if (profile.AreaID == ind)
@@ -80,7 +76,7 @@ namespace SpectrometerMeasurementsApplication
                 form6.picketCoordsList = picketCoordsList;
                 this.Hide();
                 form6.Show();
-            }                      
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -109,27 +105,44 @@ namespace SpectrometerMeasurementsApplication
             addAreaPointsForm.operators = operators;
             addAreaPointsForm.profilePoints = profilePoints;
             addAreaPointsForm.pickets = pickets;
-            addAreaPointsForm.picketCoordsList = picketCoordsList; 
+            addAreaPointsForm.picketCoordsList = picketCoordsList;
             this.Hide();
             addAreaPointsForm.ShowDialog();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (areaProfiles.Count == 0)
+            areaProfiles = new List<MeasuringAreaProfile>();
+            try
             {
-                ind = 0;
+                using (SqlConnection con = new SqlConnection(conn))
+                {
+                    con.Open();
+                    MessageBox.Show("Соединение открыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    string projectComStr = $"INSERT INTO MeasuringAreaProfile(AreaID) VALUES ({Convert.ToInt32(comboBox1.SelectedItem.ToString().Split(" | ")[0])})";
+                    SqlCommand projectCMD = new SqlCommand(projectComStr, con);
+                    projectCMD.ExecuteNonQuery();
+                    string profilesComStr = $"SELECT ProfileID, AreaID from MeasuringAreaProfile";
+                    SqlCommand profilesCMD = new SqlCommand(profilesComStr, con);
+                    SqlDataReader profilesReader = profilesCMD.ExecuteReader();
+                    if (profilesReader.HasRows)
+                        while (profilesReader.Read())
+                        {
+                            areaProfiles.Add(new MeasuringAreaProfile(profilesReader.GetInt32(0), profilesReader.GetInt32(1)));
+                            profilesList.Add(profilesReader.GetInt32(0) + " | " + "areaID: " + profilesReader.GetInt32(1));
+                        }
+                    profilesReader.Close();
+                    con.Close();
+                    MessageBox.Show("Соединение закрыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    comboBox3.DataSource = null;
+                    comboBox3.DataSource = profilesList;
+                    comboBox3.SelectedIndex = 0;
+                    MessageBox.Show("Успешное добавление!", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                }
             }
-            else
-                ind = areaProfiles[areaProfiles.Count - 1].ProfileID;
-            comboBox3.DataSource = null;
-            if (comboBox1.SelectedIndex >= 0)
+            catch (Exception ex)
             {
-                ind++;
-                areaProfiles.Add(new MeasuringAreaProfile(ind, Convert.ToInt32(comboBox1.SelectedItem.ToString().Split(" | ")[0])));
-                profilesList.Add(ind + " | " + "areaID: " + Convert.ToInt32(comboBox1.SelectedItem.ToString().Split(" | ")[0]));
-                comboBox3.DataSource = profilesList;
-                comboBox3.SelectedIndex = 0;
+                MessageBox.Show($"Ошибка добавления! {ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -138,6 +151,7 @@ namespace SpectrometerMeasurementsApplication
             comboBox2.DataSource = null;
             comboBox3.DataSource = null;
             pointsList.Clear();
+            profilesList.Clear();
             if (comboBox1.SelectedIndex < 0)
                 ind = -1;
             else
@@ -166,36 +180,121 @@ namespace SpectrometerMeasurementsApplication
 
         private void button1_Click(object sender, EventArgs e)
         {
-            for (int j = 0; j < areaPointsCoords.Count; j++)
-                if (Convert.ToInt32(comboBox2.SelectedItem.ToString().Split(" | ")[0]) == areaPointsCoords[j].CoordsID)
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conn))
                 {
-                    areaPointsCoords.Remove(areaPointsCoords[j]);
+                    if (comboBox2.SelectedItem != null)
+                    {
+                        con.Open();
+                        MessageBox.Show("Соединение открыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        string projectComStr = $"DELETE MeasuringAreaPointsCoords WHERE CoordsID = {comboBox2.SelectedItem.ToString().Split(" | ")[0]}";
+                        SqlCommand projectCMD = new SqlCommand(projectComStr, con);
+                        projectCMD.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Соединение закрыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        MessageBox.Show("Успешное удаление!", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    }
+                    for (int j = 0; j < areaPointsCoords.Count; j++)
+                        if (Convert.ToInt32(comboBox2.SelectedItem.ToString().Split(" | ")[0]) == areaPointsCoords[j].CoordsID)
+                        {
+                            areaPointsCoords.Remove(areaPointsCoords[j]);
+                        }
+                    for (int j = 0; j < pointsList.Count; j++)
+                        if (pointsList[j] == comboBox2.SelectedItem.ToString())
+                        {
+                            pointsList.Remove(pointsList[j]);
+                        }
+                    comboBox2.DataSource = null;
+                    comboBox2.Items.Remove(comboBox2.SelectedItem);
+                    comboBox2.DataSource = pointsList;
                 }
-            for (int j = 0; j < pointsList.Count; j++)
-                if (pointsList[j] == comboBox2.SelectedItem.ToString())
-                {
-                    pointsList.Remove(pointsList[j]);
-                }
-            comboBox2.DataSource = null;
-            comboBox2.Items.Remove(comboBox2.SelectedItem);
-            comboBox2.DataSource = pointsList;
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка удаления!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            for (int j = 0; j < areaProfiles.Count; j++)
-                if (Convert.ToInt32(comboBox3.SelectedItem.ToString().Split(" | ")[0]) == areaProfiles[j].ProfileID)
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conn))
                 {
-                    areaProfiles.Remove(areaProfiles[j]);
+                    if (comboBox3.SelectedItem != null)
+                    {
+                        con.Open();
+                        MessageBox.Show("Соединение открыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        string projectComStr = $"DELETE MeasuringAreaProfile WHERE ProfileID = {comboBox3.SelectedItem.ToString().Split(" | ")[0]}";
+                        SqlCommand projectCMD = new SqlCommand(projectComStr, con);
+                        projectCMD.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Соединение закрыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        MessageBox.Show("Успешное удаление!", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    }
+                    for (int j = 0; j < areaProfiles.Count; j++)
+                        if (Convert.ToInt32(comboBox3.SelectedItem.ToString().Split(" | ")[0]) == areaProfiles[j].ProfileID)
+                        {
+                            areaProfiles.Remove(areaProfiles[j]);
+                        }
+                    for (int j = 0; j < profilesList.Count; j++)
+                        if (profilesList[j] == comboBox3.SelectedItem.ToString())
+                        {
+                            profilesList.Remove(profilesList[j]);
+                        }
+                    comboBox3.DataSource = null;
+                    comboBox3.Items.Remove(comboBox3.SelectedItem);
+                    comboBox3.DataSource = profilesList;
                 }
-            for (int j = 0; j < profilesList.Count; j++)
-                if (profilesList[j] == comboBox3.SelectedItem.ToString())
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка удаления!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void AreaForm_Load(object sender, EventArgs e)
+        {
+            areaPointsCoords = new List<MeasuringAreaPointsCoords>();
+            areaProfiles = new List<MeasuringAreaProfile>();
+            try
+            {
+                MeasuringAreaPointsCoords point = null;
+                using (SqlConnection con = new SqlConnection(conn))
                 {
-                    profilesList.Remove(profilesList[j]);
+                    con.Open();
+                    //MessageBox.Show("Соединение открыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    string pointsComStr = $"SELECT CoordsID, CoordsX, CoordsY, AreaID from MeasuringAreaPointsCoords";
+                    SqlCommand pointCMD = new SqlCommand(pointsComStr, con);
+                    SqlDataReader pointsReader = pointCMD.ExecuteReader();
+                    if (pointsReader.HasRows)
+                        while (pointsReader.Read())
+                        {
+                            point = new MeasuringAreaPointsCoords(pointsReader.GetInt32(0), pointsReader.GetDecimal(1),
+                                pointsReader.GetDecimal(2), pointsReader.GetInt32(3));
+                            //MessageBox.Show("Заказчик считан", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                            areaPointsCoords.Add(point);
+                        }
+                    pointsReader.Close();
+                    string profilesComStr = $"SELECT ProfileID, AreaID from MeasuringAreaProfile";
+                    SqlCommand profilesCMD = new SqlCommand(profilesComStr, con);
+                    SqlDataReader profilesReader = profilesCMD.ExecuteReader();
+                    if (profilesReader.HasRows)
+                        while (profilesReader.Read())
+                        {
+                            areaProfiles.Add(new MeasuringAreaProfile(profilesReader.GetInt32(0), profilesReader.GetInt32(1)));
+                        }
+                    profilesReader.Close();
+                    comboBox3.DataSource = profilesList;
+                    con.Close();
                 }
-            comboBox3.DataSource = null;
-            comboBox3.Items.Remove(comboBox3.SelectedItem);
-            comboBox3.DataSource = profilesList;
+            }
+            catch
+            {
+                MessageBox.Show("Не удалось считать все данные из БД, часть данных не будет отображена!",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

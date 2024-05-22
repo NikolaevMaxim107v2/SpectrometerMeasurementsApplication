@@ -1,15 +1,5 @@
-﻿using SpectrometerMeasurementsApplication.Classes;
-using SpectrometerMeasurementsApplication.Forms;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+﻿using Microsoft.Data.SqlClient;
+using SpectrometerMeasurementsApplication.Classes;
 
 namespace SpectrometerMeasurementsApplication
 {
@@ -29,6 +19,8 @@ namespace SpectrometerMeasurementsApplication
         public List<PicketCoords> picketCoordsList = new List<PicketCoords>();
         private List<string> areasList = new List<string>();
         private Project currentProject;
+        private static string conn = "Data Source=localhost\\SQLEXPRESS;" +
+    "Initial Catalog=NikolaevMD107v2_IndTask2;Integrated Security=True;trustServerCertificate=true";
         public ProjectDataForm(Project curProject, string Username, List<Project> projectslist, List<Customer> customerslist, List<MeasuringArea> areaslist)
         {
             InitializeComponent();
@@ -41,7 +33,14 @@ namespace SpectrometerMeasurementsApplication
             currentProjectID = curProject.ProjectID;
             textBoxProjectID.Text = curProject.ProjectID.ToString();
             textBoxProjectName.Text = curProject.ProjectName;
-            textBoxProjectCustomer.Text = customers[curProject.CustomerID - 1].CustomerName;
+            for (int i = 0; i < customers.Count; i++)
+            {
+                if (customers[i].CustomerID == projects[i].CustomerID)
+                {
+                    textBoxProjectCustomer.Text = customers[i].CustomerName;
+                    break;
+                }
+            }
             textBoxProjectDateAccept.Text = curProject.AcceptDate.Date.ToString();
             textBoxProjectDateEnd.Text = curProject.EndDate.ToString();
             foreach (MeasuringArea area in areas)
@@ -106,30 +105,38 @@ namespace SpectrometerMeasurementsApplication
             button2.Visible = false;
             button3.Visible = false;
             textBoxProjectName.ReadOnly = true;
-            comboBox1.Enabled = false;
             textBoxProjectDateEnd.ReadOnly = true;
             textBoxProjectDateAccept.ReadOnly = true;
-            for (int i = 0; i < projects.Count; i++)
+            try
             {
-                if (projects[i].ProjectID == currentProjectID)
+                using (SqlConnection con = new SqlConnection("Data Source=localhost\\SQLEXPRESS;" +
+                "Initial Catalog=NikolaevMD107v2_IndTask2;Integrated Security=True;trustServerCertificate=true"))
                 {
-                    projects[i].ProjectName = textBoxProjectName.Text;
-                    if (comboBox1.SelectedItem != null)
-                        projects[i].ProjectAddress = comboBox1.SelectedItem.ToString();
-                    DateTime dateValue1;
-                    DateTime dateValue2;
-                    try
+                    con.Open();
+                    MessageBox.Show("Соединение открыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    string projectComStr;
+                    if (textBoxProjectDateEnd.Text != null && textBoxProjectDateEnd.Text != "")
                     {
-                        dateValue1 = DateTime.Parse(textBoxProjectDateEnd.Text);
-                        dateValue2 = DateTime.Parse(textBoxProjectDateAccept.Text);
-                        projects[i].EndDate = dateValue1;
-                        projects[i].AcceptDate = dateValue2;
+                        projectComStr = $"UPDATE Project SET ProjectName = N'{textBoxProjectName.Text}'," +
+                        $"AcceptDate = '{textBoxProjectDateAccept.Text}'," +
+                        $"EndDate = '{textBoxProjectDateEnd.Text}' WHERE ProjectID = {textBoxProjectID.Text}";
                     }
-                    catch (FormatException)
+                    else
                     {
-                        MessageBox.Show("Ошибка конвертации даты!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        projectComStr = $"UPDATE Project SET ProjectName = N'{textBoxProjectName.Text}'," +
+                        $"AcceptDate = '{textBoxProjectDateAccept.Text}'," +
+                        $"EndDate = null WHERE ProjectID = {textBoxProjectID.Text}";
                     }
+                    SqlCommand projectCMD = new SqlCommand(projectComStr, con);
+                    projectCMD.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("Соединение закрыто", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    MessageBox.Show("Успешное обновление данных!", "", MessageBoxButtons.OK, MessageBoxIcon.None);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка обновления данных! {ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -138,14 +145,18 @@ namespace SpectrometerMeasurementsApplication
             button2.Visible = false;
             button3.Visible=false;
             textBoxProjectName.ReadOnly = true;
-            comboBox1.Enabled = false;
+            textBoxProjectDateAccept.ReadOnly = true;
             textBoxProjectDateEnd.ReadOnly = true;
-            comboBox1.DataSource = null;
-            currentProjectID = currentProject.ProjectID;
             textBoxProjectID.Text = currentProject.ProjectID.ToString();
             textBoxProjectName.Text = currentProject.ProjectName;
-            textBoxProjectCustomer.Text = customers[currentProject.CustomerID - 1].CustomerName;
-            comboBox1.Text = currentProject.ProjectAddress;
+            for (int i = 0; i < customers.Count; i++)
+            {
+                if (customers[i].CustomerID == projects[i].CustomerID)
+                {
+                    textBoxProjectCustomer.Text = customers[i].CustomerName;
+                    break;
+                }
+            }
             textBoxProjectDateAccept.Text = currentProject.AcceptDate.Date.ToString();
             textBoxProjectDateEnd.Text = currentProject.EndDate.ToString();
         }

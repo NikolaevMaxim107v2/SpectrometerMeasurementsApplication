@@ -14,9 +14,9 @@ namespace SpectrometerMeasurementsApplication.Classes
 
         public MeasuringArea(int areaID,  string areaName, int projectID)
         {
-            _areaID = areaID;
-            _areaName = areaName;
-            _projectID = projectID;
+            AreaID = areaID;
+            AreaName = areaName;
+            ProjectID = projectID;
         }
 
         public int AreaID { get { return _areaID; } set { _areaID = value; } }

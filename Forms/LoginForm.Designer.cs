@@ -59,7 +59,7 @@
             // 
             textBoxUsername.Location = new Point(296, 203);
             textBoxUsername.Name = "textBoxUsername";
-            textBoxUsername.PlaceholderText = "Введите имя пользователя...";
+            textBoxUsername.PlaceholderText = "Введите почту...";
             textBoxUsername.RightToLeft = RightToLeft.No;
             textBoxUsername.Size = new Size(253, 23);
             textBoxUsername.TabIndex = 2;

@@ -151,7 +151,7 @@
             textBoxUser.Multiline = true;
             textBoxUser.Name = "textBoxUser";
             textBoxUser.ReadOnly = true;
-            textBoxUser.Size = new Size(220, 33);
+            textBoxUser.Size = new Size(220, 51);
             textBoxUser.TabIndex = 14;
             // 
             // groupBox1

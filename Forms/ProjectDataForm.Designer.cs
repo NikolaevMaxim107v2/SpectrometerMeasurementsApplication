@@ -119,11 +119,11 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(148, 166);
+            label4.Location = new Point(109, 166);
             label4.Name = "label4";
-            label4.Size = new Size(60, 15);
+            label4.Size = new Size(146, 15);
             label4.TabIndex = 26;
-            label4.Text = "Площади";
+            label4.Text = "Площади (неизменяемо)";
             // 
             // label3
             // 

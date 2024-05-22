@@ -13,8 +13,8 @@ namespace SpectrometerMeasurementsApplication.Classes
 
         public MeasuringAreaProfile(int profileID, int areaID)
         {
-            _profileID = profileID;
-            _areaID = areaID;
+            ProfileID = profileID;
+            AreaID = areaID;
         }
 
         public int ProfileID { get { return _profileID; } set { _profileID = value; } }

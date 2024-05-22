@@ -16,11 +16,11 @@ namespace SpectrometerMeasurementsApplication.Classes
 
         public Operator(int operatorID, string operatorName, string operatorSurname, string phone, string email)
         {
-            _operatorID = operatorID;
-            _operatorName = operatorName;
-            _operatorSurname = operatorSurname;
-            _phone = phone;
-            _email = email;
+            OperatorID = operatorID;
+            OperatorName = operatorName;
+            OperatorSurname = operatorSurname;
+            Phone = phone;
+            Email = email;
         }
 
         public int OperatorID { get { return _operatorID; } set { _operatorID = value; } }

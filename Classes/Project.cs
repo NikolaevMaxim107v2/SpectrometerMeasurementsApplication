@@ -17,12 +17,12 @@ namespace SpectrometerMeasurementsApplication.Classes
 
         public Project(int projectID, string projectName, int customerID, string projectAddress, DateTime acceptDate, DateTime? endDate)
         {
-            _projectID = projectID;
-            _projectName = projectName;
-            _customerID = customerID;
-            _projectAddress = projectAddress;
-            _acceptDate = acceptDate;
-            _endDate = endDate;
+            ProjectID = projectID;
+            ProjectName = projectName;
+            CustomerID = customerID;
+            ProjectAddress = projectAddress;
+            AcceptDate = acceptDate;
+            EndDate = endDate;
         }
 
         public int ProjectID { get { return _projectID; } set { _projectID = value; } }

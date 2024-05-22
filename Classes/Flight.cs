@@ -13,8 +13,8 @@ namespace SpectrometerMeasurementsApplication.Classes
 
         public Flight(int flightID, int profileID)
         {
-            _flightID = flightID;
-            _profileID = profileID;
+            FlightID = flightID;
+            ProfileID = profileID;
         }
 
         public int FlightID { get {  return _flightID; } set { _flightID = value; } }
